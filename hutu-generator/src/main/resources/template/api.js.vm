@@ -1,0 +1,32 @@
+import request from '@/utils/request'
+
+export function getList(query) {
+  return request({
+    url: '/${table.entityPath}/page/' + query.page + '/' + query.limit,
+    method: 'get',
+    params: query
+  })
+}
+export function createOrUpdate(data) {
+    return request({
+        url: '/${table.entityPath}/createOrUpdate',
+        method: 'post',
+        data
+    })
+}
+
+export function getById(id) {
+  return request({
+    url: '/${table.entityPath}/read/'+id,
+    method: 'get'
+  })
+}
+
+export function deleteByIds(ids) {
+  return request({
+    url: '/${table.entityPath}/delete/' + ids,
+    method: 'delete'
+  })
+}
+
+
