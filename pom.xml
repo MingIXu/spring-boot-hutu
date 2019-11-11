@@ -20,7 +20,8 @@
         <module>hutu-common</module>
         <module>hutu-dependencies</module>
         <module>hutu-generator</module>
-        <module>hutu-tools</module>
+        <module>hutu-mail</module>
+        <module>hutu-picture</module>
     </modules>
 
     <properties>
