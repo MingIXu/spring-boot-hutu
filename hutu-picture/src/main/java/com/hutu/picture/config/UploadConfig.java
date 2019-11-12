@@ -2,6 +2,7 @@ package com.hutu.picture.config;
 
 import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
+import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class UploadConfig {
 	 */
 	@Bean
 	public com.qiniu.storage.Configuration qiniuConfig() {
-		return new com.qiniu.storage.Configuration(Zone.zone0());
+		return new com.qiniu.storage.Configuration(Region.autoRegion());
 	}
 
 	/**

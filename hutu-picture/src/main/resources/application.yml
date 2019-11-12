@@ -10,7 +10,7 @@ qiniu:
   ## 此处填写你自己的七牛云 bucket
   bucket: hutu-public
   ## 此处填写你自己的七牛云 域名
-  prefix: hutu
+  prefix: http://qiniu1.hutugod.top
 spring:
   servlet:
     multipart:
