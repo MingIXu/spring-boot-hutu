@@ -43,5 +43,5 @@ public enum ResultCode {
     USERNAME_OR_PASS_ERROR(1000,"用户名或密码错误");
 
     public int code;
-    public String desc;
+    public String msg;
 }

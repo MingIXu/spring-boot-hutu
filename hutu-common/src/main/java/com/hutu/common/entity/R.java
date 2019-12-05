@@ -20,7 +20,7 @@ public class R implements Serializable {
 
     public R() {
         this.code = ResultCode.OK.code;
-        this.msg = ResultCode.OK.desc;
+        this.msg = ResultCode.OK.msg;
         this.data = new HashMap<>();
     }
 
@@ -31,7 +31,7 @@ public class R implements Serializable {
     public static R error(ResultCode resultCode) {
         R r = new R();
         r.code = resultCode.code;
-        r.msg = resultCode.desc;
+        r.msg = resultCode.msg;
         return r;
     }
 
@@ -56,7 +56,7 @@ public class R implements Serializable {
     public static R ok(ResultCode resultCode) {
         R r = new R();
         r.code = resultCode.code;
-        r.msg = resultCode.desc;
+        r.msg = resultCode.msg;
         return r;
     }
 
