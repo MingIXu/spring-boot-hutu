@@ -6,7 +6,6 @@
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>hutu-mail</artifactId>
@@ -15,6 +14,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>

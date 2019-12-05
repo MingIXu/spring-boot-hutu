@@ -1,7 +1,7 @@
 package com.hutu.mail.service;
 
 import cn.hutool.core.io.resource.ResourceUtil;
-import com.hutu.mail.ToolsApplicationTests;
+import com.hutu.mail.MailApplicationTests;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,7 +25,7 @@ import java.net.URL;
  * @version: V1.0
  * @modified: yangkai.shen
  */
-public class MailServiceTest extends ToolsApplicationTests {
+public class MailServiceTest extends MailApplicationTests {
     @Autowired
     private MailService mailService;
     @Autowired

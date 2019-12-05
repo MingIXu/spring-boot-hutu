@@ -1,7 +1,6 @@
 package com.hutu.common.entity;
 
-import com.hutu.common.enums.ErrorMsgEnum;
-import com.hutu.common.enums.InfoMsgEnum;
+import com.hutu.common.enums.ResultCode;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,30 +14,30 @@ import java.util.HashMap;
 public class R implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public Integer code;
+    public int code;
     public String msg;
-    public HashMap<String,Object> data;
+    public HashMap<String, Object> data;
 
     public R() {
-        this.code = InfoMsgEnum.OK.code;
-        this.msg = InfoMsgEnum.OK.desc;
+        this.code = ResultCode.OK.code;
+        this.msg = ResultCode.OK.desc;
         this.data = new HashMap<>();
     }
 
     public static R error() {
-        return error(ErrorMsgEnum.INTERNAL_SERVER_ERROR);
+        return error(ResultCode.INTERNAL_SERVER_ERROR);
     }
 
-    public static R error(ErrorMsgEnum eme) {
+    public static R error(ResultCode resultCode) {
         R r = new R();
-        r.code = eme.code;
-        r.msg = eme.desc;
+        r.code = resultCode.code;
+        r.msg = resultCode.desc;
         return r;
     }
 
     public static R error(String msg) {
         R r = new R();
-        r.code = ErrorMsgEnum.INTERNAL_SERVER_ERROR.code;
+        r.code = ResultCode.INTERNAL_SERVER_ERROR.code;
         r.msg = msg;
         return r;
     }
@@ -54,15 +53,22 @@ public class R implements Serializable {
         return new R();
     }
 
-    public static R ok(InfoMsgEnum isg) {
+    public static R ok(ResultCode resultCode) {
         R r = new R();
-        r.code = isg.code;
-        r.msg = isg.desc;
+        r.code = resultCode.code;
+        r.msg = resultCode.desc;
         return r;
     }
 
     public static R ok(String msg) {
         R r = new R();
+        r.msg = msg;
+        return r;
+    }
+
+    public static R ok(int code, String msg) {
+        R r = new R();
+        r.code = code;
         r.msg = msg;
         return r;
     }
