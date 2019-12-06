@@ -13,7 +13,7 @@
     <properties>
         <fastjson.version>1.2.62</fastjson.version>
         <spring4all.swagger.version>1.9.0.RELEASE</spring4all.swagger.version>
-        <mybatis-plus-boot-starter>3.2.0</mybatis-plus-boot-starter>
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <mysql.version>8.0.11</mysql.version>
         <druid-spring-boot-starter>1.1.20</druid-spring-boot-starter>
         <velocity.version>1.7</velocity.version>
@@ -23,6 +23,7 @@
         <jasypt.version>2.1.1</jasypt.version>
         <qiniu.version>7.2.25</qiniu.version>
         <aliyun.version>3.6.0</aliyun.version>
+        <mica.auto.version>1.1.0</mica.auto.version>
     </properties>
 
     <dependencyManagement>
@@ -31,12 +32,17 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-boot-starter}</version>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus-boot-starter}</version>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!--mysql驱动-->
             <dependency>
@@ -108,6 +114,12 @@
                 <groupId>com.qiniu</groupId>
                 <artifactId>qiniu-java-sdk</artifactId>
                 <version>${qiniu.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.dreamlu</groupId>
+                <artifactId>mica-auto</artifactId>
+                <version>${mica.auto.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
