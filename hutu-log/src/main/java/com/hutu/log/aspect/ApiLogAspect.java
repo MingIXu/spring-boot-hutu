@@ -21,8 +21,8 @@ import java.util.Date;
 public class ApiLogAspect {
 
 	@SneakyThrows
-	@Around("@annotation(sysLog)")
-	public Object around(ProceedingJoinPoint point, com.hutu.log.annotation.ApiLog sysLog) {
+	@Around("@annotation(apiLog)")
+	public Object around(ProceedingJoinPoint point, com.hutu.log.annotation.ApiLog apiLog) {
 		String strClassName = point.getTarget().getClass().getName();
 		String strMethodName = point.getSignature().getName();
 		log.debug("[类名]:{},[方法]:{}", strClassName, strMethodName);
