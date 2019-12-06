@@ -14,8 +14,9 @@ import java.util.HashMap;
 public class R implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public int code;
-    public String msg;
+
+    private int code;
+    private String msg;
     public HashMap<String, Object> data;
 
     public R() {

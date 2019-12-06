@@ -15,11 +15,11 @@
  */
 package com.hutu.security.utils;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.hutu.common.enums.ResultCode;
 import com.hutu.common.utils.IdGenerator;
+import com.hutu.common.utils.StringPool;
 import com.hutu.security.constant.SecureConstant;
 import com.hutu.security.exception.GlobalException;
 import io.jsonwebtoken.Claims;
@@ -44,21 +44,17 @@ public class SecureUtil {
     private final static String SECRET_KEY = "bWluZyBodWEgcWlhbmcgTE9WRSB4dSB0YWkgbGlhbiAh";
 
     /**
-     * 快过期一个小时内可以刷新令牌
-     */
-    private final static long REFRESH_TIME = 1000 * 60 * 60;
-
-    /**
      * 生成 jwt token
      */
-    public String createToken(Object sourceToken) {
+    public static TokenInfo createToken(Object sourceToken) {
         String subject = JSONUtil.toJsonStr(sourceToken);
         //发布时间
         Date nowDate = new Date();
         //过期时间
-        Date expireDate = new Date(getExpire());
+        long expire = getExpire();
+        Date expireDate = new Date(expire);
 
-        return Jwts.builder()
+        String compact = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setSubject(subject)
                 .setIssuedAt(nowDate)
@@ -66,12 +62,14 @@ public class SecureUtil {
                 .setId(IdGenerator.getIdStr())
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
+
+        return new TokenInfo(compact,(int) expire / 1000);
     }
 
     /**
      * 解析jwt token
      */
-    public Claims parseToken(String sourceToken) {
+    public static Claims parseToken(String sourceToken) {
         try {
             return Jwts.parser()
                     .setSigningKey(SECRET_KEY)
@@ -79,6 +77,7 @@ public class SecureUtil {
                     .getBody();
         } catch (Exception e) {
             log.info("解析token失败");
+            e.printStackTrace();
             throw new GlobalException("解析token失败", e);
         }
     }
@@ -86,7 +85,7 @@ public class SecureUtil {
     /**
      * 刷新Token
      */
-    public String refreshToken() {
+    public static TokenInfo refreshToken() {
 
         String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
 
@@ -99,30 +98,29 @@ public class SecureUtil {
                     .setSigningKey(SECRET_KEY)
                     .parseClaimsJws(token)
                     .getBody();
-            long issuedAt = claims.getIssuedAt().getTime();
-            long difference = System.currentTimeMillis() - issuedAt;
-            if (difference > REFRESH_TIME) {
-                //发布时间
-                Date nowDate = new Date();
-                //过期时间
-                Date expireDate = new Date(getExpire());
-                return Jwts.builder()
-                        .setHeaderParam("typ", "JWT")
-                        .setClaims(claims)
-                        .setIssuedAt(nowDate)
-                        .setExpiration(expireDate)
-                        .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
-                        .compact();
-            } else {
-                return null;
-            }
+            //发布时间
+            Date nowDate = new Date();
+            //过期时间
+            long expire = getExpire();
+            Date expireDate = new Date(expire);
+            String compact = Jwts.builder()
+                    .setHeaderParam("typ", "JWT")
+                    .setClaims(claims)
+                    .setIssuedAt(nowDate)
+                    .setExpiration(expireDate)
+                    .setId(IdGenerator.getIdStr())
+                    .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                    .compact();
+            return new TokenInfo(compact, (int) expire / 1000);
         } catch (Exception e) {
+            log.info("刷新Token失败");
+            e.printStackTrace();
             throw new GlobalException(e);
         }
     }
 
     /**
-     * 次日凌晨2点
+     * 过期时间次日凌晨2点
      *
      * @return expire
      */
@@ -136,7 +134,7 @@ public class SecureUtil {
      *
      * @return subject
      */
-    public LoginUser getCallerInfo() {
+    public static LoginUser getCallerInfo() {
         String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
         if (StrUtil.isNotEmpty(token)) {
             Claims claim = parseToken(token);
@@ -150,39 +148,54 @@ public class SecureUtil {
         return null;
     }
 
-    public Integer getUserId() {
-        try {
-            return getCallerInfo().getUserId();
-        } catch (Exception e) {
-            log.info("getUserId 失败");
-            return 0;
-        }
+
+    /**
+     * 获取用户id
+     *
+     * @return userId
+     */
+    public static Integer getUserId() {
+        LoginUser user = getCallerInfo();
+        return (null == user) ? -1 : user.getUserId();
     }
 
-    public String getAccount() {
-        try {
-            return getCallerInfo().getAccount();
-        } catch (Exception e) {
-            log.info("getAccount 失败");
-            return "";
-        }
+    /**
+     * 获取用户账号
+     *
+     * @return userAccount
+     */
+    public static String getUserAccount() {
+        LoginUser user = getCallerInfo();
+        return (null == user) ? StringPool.EMPTY : user.getAccount();
     }
 
-    public String getUserName() {
-        try {
-            return getCallerInfo().getUserName();
-        } catch (Exception e) {
-            log.info("getUserName 失败");
-            return "";
-        }
+    /**
+     * 获取用户名
+     *
+     * @return userName
+     */
+    public static String getUserName() {
+        LoginUser user = getCallerInfo();
+        return (null == user) ? StringPool.EMPTY : user.getUserName();
     }
 
-    public String getTenantId() {
-        try {
-            return getCallerInfo().getTenantId();
-        } catch (Exception e) {
-            log.error("getTenantId 失败");
-            throw e;
-        }
+    /**
+     * 获取用户角色
+     *
+     * @return userName
+     */
+    public static String getUserRole() {
+        LoginUser user = getCallerInfo();
+        return (null == user) ? StringPool.EMPTY : user.getRoleName();
+    }
+
+    /**
+     * 获取租户ID
+     *
+     * @return tenantId
+     */
+    public static String getTenantId() {
+        LoginUser user = getCallerInfo();
+        return (null == user) ? StringPool.EMPTY : user.getTenantId();
     }
 }
