@@ -28,7 +28,7 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 @TableName("t_upms_log")
-public class ApiLog implements Serializable {
+public class LogApi implements Serializable {
 
 	protected static final long serialVersionUID = 1L;
 
@@ -97,4 +97,13 @@ public class ApiLog implements Serializable {
 	 */
 	protected Date createTime;
 
+	/**
+	 * 日志类型
+	 */
+	protected String type;
+
+	/**
+	 * 日志标题
+	 */
+	protected String title;
 }

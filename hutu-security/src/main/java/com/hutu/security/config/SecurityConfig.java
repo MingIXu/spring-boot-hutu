@@ -12,6 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.hutu.security.aspect.AuthAspect;
 import com.hutu.security.constant.SecureConstant;
+import com.hutu.security.utils.SpringUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -42,6 +43,16 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public AuthAspect authAspect() {
         return new AuthAspect();
+    }
+
+    /**
+     * Spring上下文缓存
+     *
+     * @return SpringUtil
+     */
+    @Bean
+    public SpringUtil springUtils() {
+        return new SpringUtil();
     }
 
     /**

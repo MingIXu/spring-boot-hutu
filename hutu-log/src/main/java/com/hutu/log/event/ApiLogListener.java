@@ -1,6 +1,6 @@
 package com.hutu.log.event;
 
-import com.hutu.log.entity.ApiLog;
+import com.hutu.log.entity.LogApi;
 import com.hutu.log.service.ApiLogService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +22,7 @@ public class ApiLogListener {
     @Order
     @EventListener(ApiLogEvent.class)
     public void saveSysLog(ApiLogEvent event) {
-        ApiLog apiLog = (ApiLog) event.getSource();
-        log.info(apiLog.toString());
-        apiLogService.create(apiLog);
+        LogApi logApi = (LogApi) event.getSource();
+        apiLogService.saveLog(logApi);
     }
 }

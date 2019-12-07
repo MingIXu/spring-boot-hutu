@@ -24,8 +24,4 @@ public @interface ApiLog {
 	 */
 	OperateEnum type() default OperateEnum.OTHER;
 
-	/**
-	 * 所属模块
-	 */
-	String module() default "";
 }
