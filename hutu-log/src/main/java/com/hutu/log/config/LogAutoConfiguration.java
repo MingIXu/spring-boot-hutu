@@ -24,14 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 
 /**
  * 日志工具自动配置
- *
- * @author Chill
+ * @author hutu
  */
-@Order
 @Configuration
 @ConditionalOnWebApplication
 public class LogAutoConfiguration {
@@ -46,6 +43,6 @@ public class LogAutoConfiguration {
 
     @Bean
     public ApiLogListener sysLogListener() {
-        return new ApiLogListener(apiLogService==null?new ApiLogServiceImpl():apiLogService);
+        return new ApiLogListener(apiLogService == null ? new ApiLogServiceImpl() : apiLogService);
     }
 }

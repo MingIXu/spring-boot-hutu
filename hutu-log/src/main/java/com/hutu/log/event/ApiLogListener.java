@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Async;
 
 /**
  * 异步监听日志事件
+ * @author hutu
+ * @date 2019-12-07 20:21
  */
 @Slf4j
 @AllArgsConstructor
@@ -17,7 +19,6 @@ public class ApiLogListener {
 
     private final ApiLogService apiLogService;
 
-    //	@Async("自定义线程池")
     @Async
     @Order
     @EventListener(ApiLogEvent.class)

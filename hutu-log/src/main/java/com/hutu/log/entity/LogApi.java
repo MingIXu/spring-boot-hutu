@@ -25,6 +25,11 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 保存操作日志实体
+ * @author hutu
+ * @date 2019-12-07 20:20
+ */
 @Data
 @Accessors(chain = true)
 @TableName("t_upms_log")

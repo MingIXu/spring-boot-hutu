@@ -15,8 +15,8 @@ public class R implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int code;
-    private String msg;
+    public int code;
+    public String msg;
     public HashMap<String, Object> data;
 
     public R() {

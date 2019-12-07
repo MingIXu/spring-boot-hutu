@@ -6,7 +6,6 @@
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>hutu-generator</artifactId>

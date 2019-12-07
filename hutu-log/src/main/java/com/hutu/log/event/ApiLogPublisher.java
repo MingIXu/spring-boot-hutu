@@ -24,9 +24,9 @@ import com.hutu.security.utils.WebUtil;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * API日志信息事件发送
- *
- * @author Chill
+ * 日志信息事件发送
+ * @author hutu
+ * @date 2019-12-07 20:21
  */
 public class ApiLogPublisher {
 
