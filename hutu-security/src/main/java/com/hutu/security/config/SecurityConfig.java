@@ -12,9 +12,14 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.hutu.security.aspect.AuthAspect;
 import com.hutu.security.constant.SecureConstant;
+import com.hutu.security.handler.CustomRestNotFoundHandler;
+import com.hutu.security.handler.GlobalExceptionHandler;
 import com.hutu.security.utils.SpringUtil;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -31,15 +36,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * 注入鉴权aop
+ * 引入controller全局异常处理和自定义404处理
+ * <p>
+ * ErrorMvcAutoConfiguration 会先配置 BasicErrorController导致 404 mapping重复
+ * 此处在 ErrorMvcAutoConfiguration 之前配置会导致 BasicErrorController 不装载。
+ * 详情看 BasicErrorController 装载条件。
  *
  * @author hutu
  * @date 2019/7/16 14:56
  */
 @Order
 @Configuration
+@Import({CustomRestNotFoundHandler.class, GlobalExceptionHandler.class})
+@AutoConfigureBefore(ErrorMvcAutoConfiguration.class)
 public class SecurityConfig implements WebMvcConfigurer {
-
+    /**
+     * 注入鉴权aop
+     *
+     * @return AuthAspect
+     */
     @Bean
     public AuthAspect authAspect() {
         return new AuthAspect();
