@@ -17,6 +17,7 @@
     </developers>
 
     <modules>
+        <module>hutu-boot-demo</module>
         <module>hutu-common</module>
         <module>hutu-dependencies</module>
         <module>hutu-generator</module>

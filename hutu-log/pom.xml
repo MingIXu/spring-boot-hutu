@@ -13,10 +13,6 @@
     <name>日志收集模块</name>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.baomidou</groupId>-->
-<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-annotation -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -28,7 +24,11 @@
             <artifactId>hutu-security</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.hutu</groupId>
+            <artifactId>hutu-mail</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>

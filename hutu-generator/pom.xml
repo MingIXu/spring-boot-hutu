@@ -46,11 +46,7 @@
             <artifactId>velocity</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--hutool 工具类-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
+
         <!--代码生成-->
         <dependency>
             <groupId>com.baomidou</groupId>

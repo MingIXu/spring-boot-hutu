@@ -8,25 +8,16 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>hutu-mybatis</artifactId>
+    <artifactId>hutu-boot-demo</artifactId>
     <version>1.0.0</version>
-    <name>持久层默认配置</name>
+    <name>web项目例子</name>
 
     <dependencies>
-        <!--mybatis-->
+
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-        <!--mysql驱动-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!--druid数据库连接池 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
+            <groupId>com.hutu</groupId>
+            <artifactId>hutu-log</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>
