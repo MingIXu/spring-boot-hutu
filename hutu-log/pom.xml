@@ -24,11 +24,7 @@
             <artifactId>hutu-security</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.hutu</groupId>
-            <artifactId>hutu-mail</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>

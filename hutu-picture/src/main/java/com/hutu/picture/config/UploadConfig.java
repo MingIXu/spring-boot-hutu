@@ -1,6 +1,5 @@
 package com.hutu.picture.config;
 
-import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;

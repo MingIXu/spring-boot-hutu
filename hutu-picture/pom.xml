@@ -34,8 +34,9 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>com.hutu</groupId>
+            <artifactId>hutu-common</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

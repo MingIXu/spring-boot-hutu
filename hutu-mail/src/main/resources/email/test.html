@@ -17,29 +17,30 @@
 </head>
 <body>
 <div id="welcome">
-    <h3>欢迎使用 <span th:text="${project}"></span> - Powered By <span th:text=" ${author}"></span></h3>
+    <h3>发送页面邮件实例： <span th:text="${project}"></span> - 提供由 <span th:text=" ${author}"></span></h3>
     <span th:text="${url}"></span>
     <div style="text-align: center; padding: 10px">
         <a style="text-decoration: none;" href="#" th:href="@{${url}}" target="_bank">
-            <strong>spring-boot-demo，入门Spring Boot的首选Demo！:)</strong>
+            <strong>源码在这里，点击访问！</strong>
         </a>
     </div>
     <div style="text-align: center; padding: 4px">
-        如果对你有帮助,请任意打赏
+        下图是占位图，一对情侣头像！
     </div>
     <div style="width: 100%;height: 100%;text-align: center;display: flex">
         <div style="flex: 1;"></div>
         <div style="display: flex;width: 400px;">
             <div style="flex: 1;text-align: center;">
                 <div>
-                    <img width="180px" height="180px" src="http://xkcoding.com/resources/wechat-reward-image.png">
+                    <img width="180px" height="180px" src="https://i.loli.net/2019/12/10/N4BcV2RjbX8GOgL.jpg" alt="微信图片_20191016101611.jpg" title="微信图片_20191016101611.jpg" />
                 </div>
-                <div>微信打赏</div>
+                <div>她</div>
             </div>
             <div style="flex: 1;text-align: center;">
-                <div><img width="180px" height="180px" src="http://xkcoding.com/resources/alipay-reward-image.png">
+                <div>
+                    <img width="180px" height="180px" src="https://upload.cc/i1/2019/11/12/P8hsUx.jpg" alt="111.jpg" title="111.jpg" />
                 </div>
-                <div>支付宝打赏</div>
+                <div>我</div>
             </div>
         </div>
         <div style="flex: 1;"></div>

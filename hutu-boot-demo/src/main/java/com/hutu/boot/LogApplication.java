@@ -19,7 +19,7 @@ public class LogApplication {
     @Autowired
     private MailService mailService;
 
-    @ApiLog("日志apo测试")
+    @ApiLog("日志apo测试，发邮件测试")
     @RequestMapping("test")
     public String test() {
         mailService.sendSimpleMail("806001926@qq.com", "这是一封简单邮件", "这是一封普通的SpringBoot测试邮件");
