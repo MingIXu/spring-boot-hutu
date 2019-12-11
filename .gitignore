@@ -16,4 +16,4 @@ target/
 *.iml
 *.ipr
 ### 特殊文件
-application-hutu.properties
+application-hutu.yml

@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hutu.security.utils;
+package com.hutu.common.utils;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
-import com.hutu.common.utils.Charsets;
-import com.hutu.common.utils.StringPool;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
@@ -35,13 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.Objects;
 
-
-/**
- * Miscellaneous utilities for web applications.
- *
- * @author L.cm
- */
 @Slf4j
 public class WebUtil extends org.springframework.web.util.WebUtils {
 
@@ -144,7 +137,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType(contentType);
 		try (PrintWriter out = response.getWriter()) {
-			out.append(JSONUtil.toJsonStr(result));
+			out.append(JSON.toJSONString(result));
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}
@@ -294,5 +287,12 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 		return value;
 	}
 
+	public static String getRequestUri(){
+		return Objects.requireNonNull(getRequest()).getRequestURI();
+	}
+
+	public static String getUserAgent(){
+		return Objects.requireNonNull(WebUtil.getRequest()).getHeader(USER_AGENT_HEADER);
+	}
 }
 

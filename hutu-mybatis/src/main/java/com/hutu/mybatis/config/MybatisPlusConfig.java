@@ -1,6 +1,7 @@
 package com.hutu.mybatis.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/6/21 9:23
  */
 @Configuration
+@MapperScan("com.hutu.**.mapper.**")
 public class MybatisPlusConfig {
 
     /**

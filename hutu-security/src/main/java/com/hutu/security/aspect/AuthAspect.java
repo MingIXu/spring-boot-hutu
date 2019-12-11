@@ -37,11 +37,9 @@ public class AuthAspect {
     public void doBefore(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-
         PreAuth preAuth = method.getAnnotation(PreAuth.class);
         if (authService == null) {
             authService = new DefaultAuthServiceImpl();
-
         }
         if (!authService.doAuth(preAuth.logical(), preAuth.value())) {
             log.info("无权限访问,需要权限：" + Arrays.toString(preAuth.value()));

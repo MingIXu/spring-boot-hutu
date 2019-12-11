@@ -34,6 +34,10 @@ public enum ResultCode {
      */
     UNAUTHORIZED(HttpStatus.HTTP_UNAUTHORIZED, "未授权"),
     /**
+     * 无token信息
+     */
+    NOT_FOUND_TOKEN(1002, "无token信息，请重新登录"),
+    /**
      * 用户名不存在
      */
     USERNAME_NOT_EXIST(1001, "用户名不存在"),

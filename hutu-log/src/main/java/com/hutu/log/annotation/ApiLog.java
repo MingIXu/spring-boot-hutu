@@ -1,6 +1,5 @@
 package com.hutu.log.annotation;
 
-
 import com.hutu.log.enums.OperateEnum;
 
 import java.lang.annotation.*;

@@ -8,6 +8,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -15,19 +16,13 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 /**
- * <p>
- * 邮件接口
- * </p>
+ * 发送邮件全异步，记得启动类上加@EnableAsync启动异步哦
  *
- * @package: com.xkcoding.email.service.impl
- * @description: 邮件接口
- * @author: yangkai.shen
- * @date: Created in 2018/11/21 13:49
- * @copyright: Copyright (c) 2018
- * @version: V1.0
- * @modified: yangkai.shen
+ * @author hutu
+ * @date 2019-12-11 17:09
  */
 @Service
+@Async
 public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender mailSender;

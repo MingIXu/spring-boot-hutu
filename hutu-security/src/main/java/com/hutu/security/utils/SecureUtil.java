@@ -1,34 +1,20 @@
-/**
- * Copyright (c) 2018-2028, Chill Zhuang 庄骞 (smallchill@163.com).
- * <p>
- * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE 3.0;
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/lgpl.html
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 package com.hutu.security.utils;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import com.hutu.common.enums.ResultCode;
 import com.hutu.common.utils.IdGenerator;
 import com.hutu.common.utils.StringPool;
+import com.hutu.common.utils.WebUtil;
 import com.hutu.security.constant.SecureConstant;
 import com.hutu.security.exception.GlobalException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.Date;
 
 /**
@@ -47,7 +33,7 @@ public class SecureUtil {
      * 生成 jwt token
      */
     public static TokenInfo createToken(Object sourceToken) {
-        String subject = JSONUtil.toJsonStr(sourceToken);
+        String subject = JSON.toJSONString(sourceToken);
         //发布时间
         Date nowDate = new Date();
         //过期时间
@@ -75,6 +61,10 @@ public class SecureUtil {
                     .setSigningKey(SECRET_KEY)
                     .parseClaimsJws(sourceToken)
                     .getBody();
+        } catch (ExpiredJwtException e){
+            log.info("令牌token过期");
+            e.printStackTrace();
+            throw e;
         } catch (Exception e) {
             log.info("解析token失败");
             e.printStackTrace();
@@ -120,13 +110,29 @@ public class SecureUtil {
     }
 
     /**
+     * 判断token是否过期且合法
+     *
+     * @return boolean
+     */
+    public static boolean validateToken() {
+        String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
+        if (StrUtil.isNotEmpty(token)) {
+            return parseToken(token) != null;
+        } else {
+            log.info("请求中无token认证信息");
+            throw new GlobalException(ResultCode.NOT_FOUND_TOKEN);
+        }
+    }
+
+    /**
      * 过期时间次日凌晨2点
      *
      * @return expire
      */
     public static long getExpire() {
+        return System.currentTimeMillis()+3000;
         // 说明: https://blog.csdn.net/u014044812/article/details/79231738
-        return LocalDate.now().plusDays(1).atTime(2, 0, 0).toInstant(ZoneOffset.of("+8")).toEpochMilli();
+//        return LocalDate.now().plusDays(1).atTime(2, 0, 0).toInstant(ZoneOffset.of("+8")).toEpochMilli();
     }
 
     /**
@@ -138,14 +144,12 @@ public class SecureUtil {
         String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
         if (StrUtil.isNotEmpty(token)) {
             Claims claim = parseToken(token);
-            if (claim != null) {
-                return JSONUtil.toBean(claim.getSubject(), LoginUser.class);
-            }
+            return JSON.parseObject(claim.getSubject(), LoginUser.class);
+
         } else {
             log.info("请求中无token认证信息");
-            throw new GlobalException(ResultCode.UNAUTHORIZED);
+            throw new GlobalException(ResultCode.NOT_FOUND_TOKEN);
         }
-        return null;
     }
 
 

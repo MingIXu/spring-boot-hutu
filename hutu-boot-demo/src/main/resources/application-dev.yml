@@ -1,0 +1,24 @@
+
+# DataSource Config
+spring:
+  #数据源配置
+  datasource:
+    url: jdbc:mysql://localhost/greentree?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  #邮件配置
+  mail:
+    host: smtp.163.com
+    port: 465
+    username: m13871378392@163.com
+    password: 你的密码
+    protocol: smtp
+    test-connection: true
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.ssl.enable: true

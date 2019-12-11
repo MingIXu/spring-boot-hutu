@@ -13,15 +13,16 @@
     <name>日志收集模块</name>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-annotation -->
+
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-annotation</artifactId>
+            <groupId>com.hutu</groupId>
+            <artifactId>hutu-mybatis</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.hutu</groupId>
-            <artifactId>hutu-security</artifactId>
+            <artifactId>hutu-common</artifactId>
             <version>${project.version}</version>
         </dependency>
 

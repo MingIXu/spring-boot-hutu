@@ -14,7 +14,7 @@ import com.hutu.security.aspect.AuthAspect;
 import com.hutu.security.constant.SecureConstant;
 import com.hutu.security.handler.CustomRestNotFoundHandler;
 import com.hutu.security.handler.GlobalExceptionHandler;
-import com.hutu.security.utils.SpringUtil;
+import com.hutu.common.utils.SpringUtil;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -58,16 +58,6 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public AuthAspect authAspect() {
         return new AuthAspect();
-    }
-
-    /**
-     * Spring上下文缓存
-     *
-     * @return SpringUtil
-     */
-    @Bean
-    public SpringUtil springUtils() {
-        return new SpringUtil();
     }
 
     /**
