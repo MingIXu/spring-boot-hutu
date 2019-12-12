@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.hutu.common.utils.StringPool;
 import com.hutu.security.annotation.Logical;
-import com.hutu.security.utils.SecureUtil;
+import com.hutu.common.utils.token.SecureUtil;
 
 import java.util.Arrays;
 /**

@@ -69,6 +69,7 @@ public class SpringUtil implements ApplicationContextAware {
 
 	public static void publishEvent(ApplicationEvent event) {
 		if (context == null) {
+			log.error("推送时间失败，context为空！");
 			return;
 		}
 		try {

@@ -1,8 +1,8 @@
-package com.hutu.security.handler;
+package com.hutu.common.handler;
 
 import com.hutu.common.entity.R;
 import com.hutu.common.enums.ResultCode;
-import com.hutu.security.exception.GlobalException;
+import com.hutu.common.exception.GlobalException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

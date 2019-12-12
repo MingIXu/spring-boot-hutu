@@ -1,4 +1,4 @@
-package com.hutu.security.utils;
+package com.hutu.common.utils.token;
 
 import lombok.Data;
 

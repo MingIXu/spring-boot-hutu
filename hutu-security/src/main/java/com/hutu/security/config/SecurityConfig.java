@@ -10,11 +10,11 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import com.hutu.common.constant.CommonConstant;
 import com.hutu.security.aspect.AuthAspect;
 import com.hutu.security.constant.SecureConstant;
-import com.hutu.security.handler.CustomRestNotFoundHandler;
-import com.hutu.security.handler.GlobalExceptionHandler;
-import com.hutu.common.utils.SpringUtil;
+import com.hutu.common.handler.CustomRestNotFoundHandler;
+import com.hutu.common.handler.GlobalExceptionHandler;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -36,19 +36,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * 引入controller全局异常处理和自定义404处理
- * <p>
- * ErrorMvcAutoConfiguration 会先配置 BasicErrorController导致 404 mapping重复
- * 此处在 ErrorMvcAutoConfiguration 之前配置会导致 BasicErrorController 不装载。
- * 详情看 BasicErrorController 装载条件。
  *
  * @author hutu
  * @date 2019/7/16 14:56
  */
 @Order
 @Configuration
-@Import({CustomRestNotFoundHandler.class, GlobalExceptionHandler.class})
-@AutoConfigureBefore(ErrorMvcAutoConfiguration.class)
 public class SecurityConfig implements WebMvcConfigurer {
     /**
      * 注入鉴权aop
@@ -76,7 +69,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         // 放行哪些原始域(头部信息)
         config.addAllowedHeader("*");
         // 暴露哪些头部信息（因为跨域访问默认不能获取全部头部信息）
-        config.addExposedHeader(SecureConstant.BASIC_HEADER_KEY);
+        config.addExposedHeader(CommonConstant.BASIC_HEADER_KEY);
         UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
         configSource.registerCorsConfiguration("/**", config);
         return new CorsFilter(configSource);

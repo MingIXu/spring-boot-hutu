@@ -1,14 +1,14 @@
 
-package com.hutu.security.utils;
+package com.hutu.common.utils.token;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.hutu.common.constant.CommonConstant;
 import com.hutu.common.enums.ResultCode;
+import com.hutu.common.exception.GlobalException;
 import com.hutu.common.utils.IdGenerator;
 import com.hutu.common.utils.StringPool;
 import com.hutu.common.utils.WebUtil;
-import com.hutu.security.constant.SecureConstant;
-import com.hutu.security.exception.GlobalException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -77,7 +77,7 @@ public class SecureUtil {
      */
     public static TokenInfo refreshToken() {
 
-        String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
+        String token = WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
 
         if (StrUtil.isEmpty(token)) {
             log.info("请求中无token认证信息");
@@ -115,7 +115,7 @@ public class SecureUtil {
      * @return boolean
      */
     public static boolean validateToken() {
-        String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
+        String token = WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
         if (StrUtil.isNotEmpty(token)) {
             return parseToken(token) != null;
         } else {
@@ -141,7 +141,7 @@ public class SecureUtil {
      * @return subject
      */
     public static LoginUser getCallerInfo() {
-        String token = WebUtil.getRequestParameter(SecureConstant.BASIC_HEADER_KEY);
+        String token = WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
         if (StrUtil.isNotEmpty(token)) {
             Claims claim = parseToken(token);
             return JSON.parseObject(claim.getSubject(), LoginUser.class);

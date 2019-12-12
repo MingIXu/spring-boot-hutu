@@ -13,11 +13,7 @@
     <name>鉴权模块</name>
 
     <dependencies>
-        <!-- JWT -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.hutu</groupId>
             <artifactId>hutu-common</artifactId>

@@ -1,4 +1,4 @@
-package com.hutu.security.handler;
+package com.hutu.common.handler;
 
 import com.hutu.common.entity.R;
 import com.hutu.common.enums.ResultCode;

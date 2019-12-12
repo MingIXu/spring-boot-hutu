@@ -1,4 +1,4 @@
-package com.hutu.security.exception;
+package com.hutu.common.exception;
 
 
 import com.hutu.common.enums.ResultCode;

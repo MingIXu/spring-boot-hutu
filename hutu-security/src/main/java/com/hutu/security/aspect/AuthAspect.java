@@ -2,7 +2,7 @@ package com.hutu.security.aspect;
 
 import com.hutu.common.enums.ResultCode;
 import com.hutu.security.annotation.PreAuth;
-import com.hutu.security.exception.GlobalException;
+import com.hutu.common.exception.GlobalException;
 import com.hutu.security.service.AuthService;
 import com.hutu.security.service.DefaultAuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;

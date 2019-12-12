@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * 默认鉴权实现
+ * 测试自定义鉴权逻辑
  * @author hutu
  * @date 2019-12-06 18:46
  */

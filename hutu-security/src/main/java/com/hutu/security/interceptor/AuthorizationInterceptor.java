@@ -1,7 +1,7 @@
 package com.hutu.security.interceptor;
 
 import com.hutu.security.annotation.SkipAuth;
-import com.hutu.security.utils.SecureUtil;
+import com.hutu.common.utils.token.SecureUtil;
 import com.hutu.common.utils.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

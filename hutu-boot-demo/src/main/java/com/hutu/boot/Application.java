@@ -44,7 +44,7 @@ public class Application {
     @ApiLog("发邮件测试")
     @RequestMapping("sendMail")
     public R sendMail() {
-        mailService.sendSimpleMail("806001926@qq.com", "这是一封简单邮件", "这是一封普通的SpringBoot测试邮件");
+        mailService.sendSimpleMail("XXXXXXXXX@qq.com", "这是一封简单邮件", "这是一封普通的SpringBoot测试邮件");
         return R.ok("邮件发送成功");
     }
 }

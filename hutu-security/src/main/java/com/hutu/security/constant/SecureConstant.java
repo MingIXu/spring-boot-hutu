@@ -1,17 +1,7 @@
 
 package com.hutu.security.constant;
 
-/**
- * 授权校验常量
- *
- * @author Chill
- */
 public interface SecureConstant {
-
-    /**
-     * 认证请求头
-     */
-    String BASIC_HEADER_KEY = "Authorization";
 
     /**
      * 请求白名单
