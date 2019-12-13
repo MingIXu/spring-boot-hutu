@@ -1,6 +1,11 @@
 
 package com.hutu.security.constant;
 
+/**
+ * 安全常量
+ * @author hutu
+ * @date 2019-12-13 10:53
+ */
 public interface SecureConstant {
 
     /**

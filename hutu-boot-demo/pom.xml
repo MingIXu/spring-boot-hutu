@@ -10,6 +10,7 @@
 
     <artifactId>hutu-boot-demo</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
     <name>web项目例子</name>
 
     <properties>
@@ -53,6 +54,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

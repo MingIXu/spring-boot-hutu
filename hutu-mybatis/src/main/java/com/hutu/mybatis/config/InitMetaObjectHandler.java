@@ -3,7 +3,6 @@ package com.hutu.mybatis.config;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.hutu.common.utils.token.TokenUtil;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -30,44 +29,19 @@ public class InitMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        Object createTime = getFieldValByName(CREATE_TIME, metaObject);
-        Object createId = getFieldValByName(CREATE_ID, metaObject);
-        Object createName = getFieldValByName(CREATE_NAME, metaObject);
-
-        Object updateTime = getFieldValByName(UPDATE_TIME, metaObject);
-        Object updateId = getFieldValByName(UPDATE_ID, metaObject);
-        Object updateName = getFieldValByName(UPDATE_NAME, metaObject);
-
-        Object tenantId = getFieldValByName(TENANT_ID, metaObject);
-
 
         LocalDateTime date = LocalDateTime.now();
         Integer userId = TokenUtil.getUserId();
         String userName = TokenUtil.getUserName();
         String userTenantId = TokenUtil.getTenantId();
 
-        if (createTime == null) {
-            setFieldValByName(CREATE_TIME, date, metaObject);
-        }
-        if (createId == null) {
-            setFieldValByName(CREATE_ID, userId, metaObject);
-        }
-        if (createName == null) {
-            setFieldValByName(CREATE_NAME, userName, metaObject);
-        }
-
-        if (updateTime == null) {
-            setFieldValByName(UPDATE_TIME, date, metaObject);
-        }
-        if (updateId == null) {
-            setFieldValByName(UPDATE_ID, userId, metaObject);
-        }
-        if (updateName == null) {
-            setFieldValByName(UPDATE_NAME, userName, metaObject);
-        }
-        if (tenantId == null) {
-            setFieldValByName(TENANT_ID, userTenantId, metaObject);
-        }
+        setFieldValByName(CREATE_TIME, date, metaObject);
+        setFieldValByName(CREATE_ID, userId, metaObject);
+        setFieldValByName(CREATE_NAME, userName, metaObject);
+        setFieldValByName(UPDATE_TIME, date, metaObject);
+        setFieldValByName(UPDATE_ID, userId, metaObject);
+        setFieldValByName(UPDATE_NAME, userName, metaObject);
+        setFieldValByName(TENANT_ID, userTenantId, metaObject);
     }
 
     /**
