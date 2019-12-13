@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.hutu.common.utils.StringPool;
 import com.hutu.security.annotation.Logical;
-import com.hutu.common.utils.token.SecureUtil;
+import com.hutu.common.utils.token.TokenUtil;
 
 import java.util.Arrays;
 /**
@@ -16,7 +16,7 @@ public class DefaultAuthServiceImpl implements AuthService {
 
     @Override
     public boolean doAuth(Logical logical, String[] role) {
-        String userRole = SecureUtil.getUserRole();
+        String userRole = TokenUtil.getUserRole();
         if (StrUtil.isBlank(userRole)) {
             return false;
         }

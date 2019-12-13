@@ -1,7 +1,7 @@
 package com.hutu.security.interceptor;
 
 import com.hutu.security.annotation.SkipAuth;
-import com.hutu.common.utils.token.SecureUtil;
+import com.hutu.common.utils.token.TokenUtil;
 import com.hutu.common.utils.WebUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,6 @@ import static com.hutu.security.constant.SecureConstant.WHITE_WORDS;
  * @date 2019/6/6 14:40
  */
 @Slf4j
-@Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
     @Override
@@ -32,7 +31,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         if (handler instanceof HandlerMethod) {
             skipAuth = ((HandlerMethod) handler).getMethodAnnotation(SkipAuth.class);
             //如果有@SkipAuth注解或白名单，则不验证token。判断是否有token且是合法的没过期的
-            return isWhilePath() || skipAuth != null || SecureUtil.validateToken();
+            return isWhilePath() || skipAuth != null || TokenUtil.validateToken();
         } else {
             return true;
         }

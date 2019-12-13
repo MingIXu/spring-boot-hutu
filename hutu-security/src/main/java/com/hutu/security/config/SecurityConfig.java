@@ -15,6 +15,7 @@ import com.hutu.security.aspect.AuthAspect;
 import com.hutu.security.constant.SecureConstant;
 import com.hutu.common.handler.CustomRestNotFoundHandler;
 import com.hutu.common.handler.GlobalExceptionHandler;
+import com.hutu.security.interceptor.AuthorizationInterceptor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.text.SimpleDateFormat;
@@ -36,13 +38,22 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- *
+ * 安全配置类
  * @author hutu
  * @date 2019/7/16 14:56
  */
 @Order
 @Configuration
 public class SecurityConfig implements WebMvcConfigurer {
+
+    /**
+     * 注册token拦截器
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new AuthorizationInterceptor());
+    }
     /**
      * 注入鉴权aop
      *

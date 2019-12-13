@@ -18,12 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Date;
 
 /**
- * Secure工具类
- *
- * @author Chill
+ * token工具类
+ * @author hutu
+ * @date 2019-12-13 9:29
  */
 @Slf4j
-public class SecureUtil {
+public class TokenUtil {
     /**
      * 签名key
      */
@@ -77,7 +77,7 @@ public class SecureUtil {
      */
     public static TokenInfo refreshToken() {
 
-        String token = WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
+        String token = getTokenString();
 
         if (StrUtil.isEmpty(token)) {
             log.info("请求中无token认证信息");
@@ -115,12 +115,17 @@ public class SecureUtil {
      * @return boolean
      */
     public static boolean validateToken() {
-        String token = WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
+        String token = getTokenString();
         if (StrUtil.isNotEmpty(token)) {
-            return parseToken(token) != null;
+            try{
+                parseToken(token);
+                return true;
+            } catch (Exception e){
+                return false;
+            }
         } else {
             log.info("请求中无token认证信息");
-            throw new GlobalException(ResultCode.NOT_FOUND_TOKEN);
+            return false;
         }
     }
 
@@ -141,15 +146,18 @@ public class SecureUtil {
      * @return subject
      */
     public static LoginUser getCallerInfo() {
-        String token = WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
+        String token = getTokenString();
         if (StrUtil.isNotEmpty(token)) {
             Claims claim = parseToken(token);
             return JSON.parseObject(claim.getSubject(), LoginUser.class);
-
         } else {
             log.info("请求中无token认证信息");
-            throw new GlobalException(ResultCode.NOT_FOUND_TOKEN);
+            return null;
         }
+    }
+
+    private static String getTokenString() {
+        return WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
     }
 
 
