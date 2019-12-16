@@ -78,6 +78,37 @@
 				</div>
 			</Card>
 		</i-col>
+		<i-col span="12">
+			<Card style="height: 300px;">
+				<p slot="title">
+					<Icon type="md-cloud-upload"></Icon>
+					sm.ms图床上传
+				</p>
+				<div style="text-align: center;">
+					<Upload
+							:before-upload="handleSmmsUpload"
+							action="/demo/upload/smms"
+							ref="smmsUploadRef"
+							:on-success="handleSmmsSuccess"
+							:on-error="handleSmmsError"
+					>
+						<i-button icon="ios-cloud-upload-outline">选择文件</i-button>
+					</Upload>
+					<i-button
+							type="primary"
+							@click="smmsUpload"
+							:loading="smms.loadingStatus"
+							:disabled="!smms.file">
+						{{ smms.loadingStatus ? '文件上传中' : '上传' }}
+					</i-button>
+				</div>
+				<div>
+					<div v-if="smms.log.status != 0">状态：{{smms.log.message}}</div>
+					<div v-if="smms.log.status === 200">文件名：{{smms.log.fileName}}</div>
+					<div v-if="smms.log.status === 200">文件路径：{{smms.log.filePath}}</div>
+				</div>
+			</Card>
+		</i-col>
 	</Row>
 </div>
 <script>
@@ -107,6 +138,18 @@
 					fileName: "",
 					filePath: ""
 				}
+			},
+			smms: {
+				// 选择文件后，将 beforeUpload 返回的 file 保存在这里，后面会用到
+				file: null,
+				// 标记上传状态
+				loadingStatus: false,
+				log: {
+					status: 0,
+					message: "",
+					fileName: "",
+					filePath: ""
+				}
 			}
 		},
 		methods: {
@@ -126,16 +169,16 @@
 				this.local.file = null;
 				this.local.loadingStatus = false;
 				if (response.code === 200) {
-					this.$Message.success(response.message);
+					this.$Message.success(response.msg);
 					this.local.log.status = response.code;
-					this.local.log.message = response.message;
+					this.local.log.message = response.msg;
 					this.local.log.fileName = response.data.fileName;
 					this.local.log.filePath = response.data.filePath;
 					this.$refs.localUploadRef.clearFiles();
 				} else {
-					this.$Message.error(response.message);
+					this.$Message.error(response.msg);
 					this.local.log.status = response.code;
-					this.local.log.message = response.message;
+					this.local.log.message = response.msg;
 				}
 			},
 			// 上传失败后，清空 data 里的 file，并修改上传状态
@@ -160,22 +203,57 @@
 				this.yun.file = null;
 				this.yun.loadingStatus = false;
 				if (response.code === 200) {
-					this.$Message.success(response.message);
+					this.$Message.success(response.msg);
 					this.yun.log.status = response.code;
-					this.yun.log.message = response.message;
+					this.yun.log.message = response.msg;
 					this.yun.log.fileName = response.data.fileName;
 					this.yun.log.filePath = response.data.filePath;
 					this.$refs.yunUploadRef.clearFiles();
 				} else {
-					this.$Message.error(response.message);
+					this.$Message.error(response.msg);
 					this.yun.log.status = response.code;
-					this.yun.log.message = response.message;
+					this.yun.log.message = response.msg;
 				}
 			},
 			// 上传失败后，清空 data 里的 file，并修改上传状态
 			handleYunError() {
 				this.yun.file = null;
 				this.yun.loadingStatus = false;
+				this.$Message.error('上传失败');
+			},
+
+			// beforeUpload 在返回 false 或 Promise 时，会停止自动上传，这里我们将选择好的文件 file 保存在 data里，并 return false
+			handleSmmsUpload(file) {
+				this.smms.file = file;
+				return false;
+			},
+			// 这里是手动上传，通过 $refs 获取到 Upload 实例，然后调用私有方法 .post()，把保存在 data 里的 file 上传。
+			// iView 的 Upload 组件在调用 .post() 方法时，就会继续上传了。
+			smmsUpload() {
+				this.smms.loadingStatus = true;  // 标记上传状态
+				this.$refs.smmsUploadRef.post(this.smms.file);
+			},
+			// 上传成功后，清空 data 里的 file，并修改上传状态
+			handleSmmsSuccess(response) {
+				this.smms.file = null;
+				this.smms.loadingStatus = false;
+				if (response.code === 200) {
+					this.$Message.success(response.msg);
+					this.smms.log.status = response.code;
+					this.smms.log.message = response.msg;
+					this.smms.log.fileName = response.data.fileName;
+					this.smms.log.filePath = response.data.filePath;
+					this.$refs.smmsUploadRef.clearFiles();
+				} else {
+					this.$Message.error(response.msg);
+					this.smms.log.status = response.code;
+					this.smms.log.message = response.msg;
+				}
+			},
+			// 上传失败后，清空 data 里的 file，并修改上传状态
+			handleSmmsError() {
+				this.smms.file = null;
+				this.smms.loadingStatus = false;
 				this.$Message.error('上传失败');
 			}
 		}

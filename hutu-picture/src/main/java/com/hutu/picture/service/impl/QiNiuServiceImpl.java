@@ -14,19 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 
-/**
- * <p>
- * 七牛云上传Service
- * </p>
- *
- * @package: com.xkcoding.upload.service.impl
- * @description: 七牛云上传Service
- * @author: yangkai.shen
- * @date: Created in 2018/11/6 17:22
- * @copyright: Copyright (c) 2018
- * @version: V1.0
- * @modified: yangkai.shen
- */
 @Service
 @Slf4j
 public class QiNiuServiceImpl implements IQiNiuService, InitializingBean {

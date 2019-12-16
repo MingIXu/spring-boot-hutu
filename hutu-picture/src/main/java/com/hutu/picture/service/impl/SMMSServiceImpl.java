@@ -3,7 +3,7 @@ package com.hutu.picture.service.impl;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.hutu.picture.constant.PictureConstants;
-import com.hutu.picture.service.PictureService;
+import com.hutu.picture.service.SMMSService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +15,12 @@ import java.util.HashMap;
  */
 @Service
 @Slf4j
-public class SMMSServiceImpl implements PictureService {
+public class SMMSServiceImpl implements SMMSService {
 
     @Override
-    public void upload(File file) {
+    public String upload(File file) {
         HashMap<String, Object> paramMap = new HashMap<>(1);
         paramMap.put("smfile", file);
-        String result = HttpUtil.post(PictureConstants.SM_MS_URL, paramMap);
-        System.out.println(JSONUtil.parseObj(result));
+        return HttpUtil.post(PictureConstants.SM_MS_URL, paramMap);
     }
 }
