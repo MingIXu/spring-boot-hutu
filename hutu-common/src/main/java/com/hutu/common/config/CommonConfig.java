@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 
 
 /**
@@ -19,7 +17,6 @@ import org.springframework.core.annotation.Order;
  * 此处在 ErrorMvcAutoConfiguration 之前配置会导致 BasicErrorController 不装载。
  * 详情看 BasicErrorController 装载条件。
  *
- *
  * @author hutu
  * @date 2019-12-11 16:17
  */
@@ -28,12 +25,12 @@ import org.springframework.core.annotation.Order;
 @AutoConfigureBefore(ErrorMvcAutoConfiguration.class)
 public class CommonConfig {
     /**
-     * Spring上下文缓存
+     * Spring上下文缓存, 此处初始化springUtil静态类中的context
      *
      * @return SpringUtil
      */
     @Bean
-    public SpringUtil springUtils() {
+    public SpringUtil springUtil() {
         return new SpringUtil();
     }
 }

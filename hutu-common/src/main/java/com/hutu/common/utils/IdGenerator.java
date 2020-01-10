@@ -1,6 +1,5 @@
 package com.hutu.common.utils;
 
-
 import com.hutu.common.utils.sequence.Sequence;
 
 /**
@@ -9,9 +8,7 @@ import com.hutu.common.utils.sequence.Sequence;
  * 1. 如果发现当前时间少于上次生成id的时间(时间回拨)，着计算回拨的时间差
  * 2. 如果时间差(offset)小于等于5ms，着等待 offset * 2 的时间再生成
  * 3. 如果offset大于5，则直接抛出异常
- *
- * @author zlt
- * @date 2019/3/5
+ * @author hutu
  */
 public class IdGenerator {
     private static Sequence WORKER = new Sequence(1L);

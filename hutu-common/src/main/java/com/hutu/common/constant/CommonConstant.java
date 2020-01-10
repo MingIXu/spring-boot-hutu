@@ -11,6 +11,6 @@ public interface CommonConstant {
     /**
      * 认证请求头
      */
-    String BASIC_HEADER_KEY = "Authorization";
+    String TOKEN_HEADER_KEY = "Authorization";
 
 }

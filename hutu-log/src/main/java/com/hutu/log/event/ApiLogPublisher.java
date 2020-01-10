@@ -15,7 +15,7 @@ import java.util.Date;
  * @date 2019-12-07 20:21
  */
 public class ApiLogPublisher {
-    public static void publishEvent(String methodName, String className, ApiLog apiLog,long startTime, long time, Object[] args,Object result) {
+    public static void publishEvent(String methodName, String className, ApiLog apiLog, long startTime, long time, Object[] args, Object result) {
         LogApi logApi = new LogApi()
                 .setType(apiLog.type().value)
                 .setDescription(apiLog.value())

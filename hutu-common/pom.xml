@@ -55,7 +55,7 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
-
+        <!--spring boot start助手，自动生成 spring.factories 和 devtools 的配置-->
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>

@@ -1,15 +1,11 @@
 package com.hutu.common.utils;
 
-/**
- * Created by BlueT on 2017/3/16.
- */
-
 import java.util.regex.Pattern;
 
 /**
  * 正则工具类
  * 提供验证邮箱、手机号、电话号码、身份证号码、数字等方法
- * @author biezhi Github地址： https://github.com/biezhi
+ * @author biezhi
  * @date 2018/7/20 11:40
  */
 public final class PatternUtils {

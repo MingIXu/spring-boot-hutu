@@ -15,7 +15,7 @@ public class TreeUtil{
    * @param treeNodes 传入的树节点列表
    * @return
    */
-  public static <T extends TreeNode> List<T> bulid(List<T> treeNodes, Object root) {
+  public static <T extends TreeNode> List<T> build(List<T> treeNodes, Object root) {
 
     List<T> trees = new ArrayList<T>();
 

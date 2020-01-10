@@ -1,6 +1,8 @@
 package com.hutu.common.entity;
 
 import com.hutu.common.enums.ResultCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -11,13 +13,15 @@ import java.util.HashMap;
  * @author hutu
  * @date 2018/7/19 17:00
  */
+@Setter
+@Getter
 public class R implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public int code;
-    public String msg;
-    public HashMap<String, Object> data;
+    private int code;
+    private String msg;
+    private HashMap<String, Object> data;
 
     public R() {
         this.code = ResultCode.OK.code;

@@ -157,7 +157,7 @@ public class TokenUtil {
     }
 
     private static String getTokenString() {
-        return WebUtil.getRequestParameter(CommonConstant.BASIC_HEADER_KEY);
+        return WebUtil.getRequestParameter(CommonConstant.TOKEN_HEADER_KEY);
     }
 
 

@@ -27,13 +27,15 @@ public class ApiLogAspect {
         Object result = null;
         try {
             result = point.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+        } catch (Exception e) {
+            log.error("访问接口报错，无日志信息记录！");
+            throw e;
+        } finally {
+            Long endTime = System.currentTimeMillis();
+            long spendTime = endTime - startTime;
+            //记录日志
+            ApiLogPublisher.publishEvent(strMethodName, strClassName, apiLog, startTime, spendTime, point.getArgs(), result);
         }
-        Long endTime = System.currentTimeMillis();
-        long spendTime = endTime - startTime;
-        //记录日志
-        ApiLogPublisher.publishEvent(strMethodName, strClassName, apiLog,startTime, spendTime, point.getArgs(), result);
         return result;
     }
 
