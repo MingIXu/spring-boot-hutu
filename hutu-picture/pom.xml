@@ -8,7 +8,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>picture</artifactId>
+    <artifactId>hutu-picture</artifactId>
     <version>1.0.0</version>
     <name>图床管理工具</name>
 
