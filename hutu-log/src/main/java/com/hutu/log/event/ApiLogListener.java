@@ -10,6 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 
 /**
  * 异步监听日志事件
+ *
  * @author hutu
  * @date 2019-12-07 20:21
  */

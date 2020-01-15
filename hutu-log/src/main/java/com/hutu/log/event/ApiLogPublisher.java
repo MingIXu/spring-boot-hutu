@@ -6,6 +6,7 @@ import com.hutu.common.utils.WebUtil;
 import com.hutu.log.annotation.ApiLog;
 import com.hutu.log.entity.LogApi;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -27,6 +28,7 @@ public class ApiLogPublisher {
                 .setResult(JSON.toJSONString(result))
                 .setIp(WebUtil.getIP())
                 .setUri(WebUtil.getRequestUri())
+                .setUrl(WebUtil.getRequest().getRequestURL().toString())
                 .setUserAgent(WebUtil.getUserAgent());
         SpringUtil.publishEvent(new ApiLogEvent(logApi));
     }

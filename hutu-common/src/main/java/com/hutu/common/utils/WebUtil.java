@@ -256,7 +256,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 		String value;
 		HttpServletRequest httpServletRequest = getRequest();
 		if (httpServletRequest==null){
-			log.error("从请求中获取 httpServletRequest 失败！");
+			log.warn("从请求中获取 httpServletRequest 失败！");
 			return null;
 		}
 		//从header中获取
@@ -265,7 +265,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 		if (StrUtil.isBlank(value)) {
 			value = httpServletRequest.getParameter(param);
 			if (StrUtil.isBlank(value)) {
-				log.error("从Request获取参数:" + param + " 失败");
+				log.warn("从Request获取参数:" + param + " 失败");
 				value = null;
 			}
 		}

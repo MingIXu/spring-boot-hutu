@@ -60,7 +60,7 @@ public class LogApi implements Serializable {
 	/**
 	 * URL
 	 */
-	private String url;
+	private String  url;
 	/**
 	 * 请求类型
 	 */
@@ -85,9 +85,5 @@ public class LogApi implements Serializable {
 	 * 请求结果
 	 */
 	private String result;
-	/**
-	 * 权限值
-	 */
-	private String permissions;
 
 }

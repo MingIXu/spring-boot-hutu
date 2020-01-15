@@ -28,7 +28,7 @@ public class ApiLogAspect {
         try {
             result = point.proceed();
         } catch (Exception e) {
-            log.error("访问接口报错，无日志信息记录！");
+            result = e.getMessage();
             throw e;
         } finally {
             Long endTime = System.currentTimeMillis();

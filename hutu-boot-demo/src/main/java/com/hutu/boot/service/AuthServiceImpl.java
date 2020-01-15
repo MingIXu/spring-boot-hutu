@@ -1,4 +1,4 @@
-package com.hutu.boot;
+package com.hutu.boot.service;
 
 import com.hutu.security.annotation.Logical;
 import com.hutu.security.service.AuthService;
@@ -16,7 +16,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean doAuth(Logical logical, String[] role) {
-        log.info("测试自定义鉴权逻辑");
+        log.info("测试自定义鉴权逻辑 逻辑logical: {} 所需角色role: {}",logical,role);
         return false;
     }
 }

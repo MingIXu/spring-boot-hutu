@@ -16,7 +16,7 @@ public enum ResultCode {
     /**
      * 操作成功
      */
-    OK(HttpStatus.HTTP_OK, "操作成功"),
+    OK(HttpStatus.HTTP_OK, "成功"),
     /**
      * 404 找不到请求资源
      */

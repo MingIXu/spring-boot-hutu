@@ -126,6 +126,7 @@
                 <artifactId>mica-auto</artifactId>
                 <version>${mica.auto.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

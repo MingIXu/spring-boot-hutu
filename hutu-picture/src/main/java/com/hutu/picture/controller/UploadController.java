@@ -10,6 +10,7 @@ import com.hutu.common.entity.R;
 import com.hutu.common.utils.StringPool;
 import com.hutu.picture.service.IQiNiuService;
 import com.hutu.picture.service.SMMSService;
+import com.hutu.picture.vo.UploadFileVo;
 import com.qiniu.http.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class UploadController {
         }
 
         log.info("【文件上传至本地】绝对路径：{}", localFilePath);
-        return R.ok("上传成功").put("fileName", fileName).put("filePath", localFilePath);
+        return R.ok(new UploadFileVo(fileName,localFilePath));
     }
 
     @PostMapping(value = "/yun", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -84,7 +85,7 @@ public class UploadController {
                 FileUtil.del(new File(localFilePath));
 
                 log.info("【文件上传至七牛云】绝对路径：{}", yunFilePath);
-                return R.ok("上传成功").put("fileName", fileName).put("filePath", yunFilePath);
+                return R.ok(new UploadFileVo(fileName,yunFilePath));
             } else {
                 log.error("【文件上传至七牛云】失败，{}", JSONUtil.toJsonStr(response));
                 FileUtil.del(new File(localFilePath));
@@ -112,7 +113,7 @@ public class UploadController {
 			log.info("【文件上传至sm.ms】绝对路径：{}", response);
 			JSONObject jsonObject = JSON.parseObject(response);
 			String filePath = ((JSONObject) jsonObject.get("data")).getString("url");
-			return R.ok("上传成功").put("fileName", fileName).put("filePath", filePath);
+            return R.ok(new UploadFileVo(fileName,filePath));
         } catch (IOException e) {
             log.error("【文件上传至sm.ms】失败，绝对路径：{}", localFilePath);
             return R.error("文件上传失败");

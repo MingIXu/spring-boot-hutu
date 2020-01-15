@@ -40,7 +40,7 @@ public class CodeGenController {
      */
     @GetMapping("/table")
     public R listTables(TableRequest request) {
-        return R.ok().put("list", codeGenService.listTables(request));
+        return R.ok(codeGenService.listTables(request));
     }
 
     /**
