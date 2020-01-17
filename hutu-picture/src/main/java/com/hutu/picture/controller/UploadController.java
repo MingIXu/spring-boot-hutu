@@ -8,8 +8,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hutu.common.entity.R;
 import com.hutu.common.utils.StringPool;
-import com.hutu.picture.service.IQiNiuService;
-import com.hutu.picture.service.SMMSService;
+import com.hutu.picture.service.QiniuService;
+import com.hutu.picture.service.PictureService;
 import com.hutu.picture.vo.UploadFileVo;
 import com.qiniu.http.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -25,8 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
-@RestController
 @Slf4j
+@RestController
 @RequestMapping("/upload")
 public class UploadController {
     @Value("${spring.servlet.multipart.location}")
@@ -35,13 +35,14 @@ public class UploadController {
     @Value("${qiniu.prefix}")
     private String prefix;
 
-    private final IQiNiuService qiNiuService;
-    @Autowired
-    SMMSService smmsService;
+    private final QiniuService qiniuService;
+
+    private final PictureService pictureService;
 
     @Autowired
-    public UploadController(IQiNiuService qiNiuService) {
-        this.qiNiuService = qiNiuService;
+    public UploadController(QiniuService qiniuService,PictureService pictureService) {
+        this.qiniuService = qiniuService;
+        this.pictureService = pictureService;
     }
 
     @PostMapping(value = "/local", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -75,7 +76,7 @@ public class UploadController {
         String localFilePath = StrUtil.appendIfMissing(fileTempPath, StringPool.SLASH) + rawFileName + StringPool.DASH + DateUtil.current(false) + StringPool.DOT + fileType;
         try {
             file.transferTo(new File(localFilePath));
-            Response response = qiNiuService.uploadFile(new File(localFilePath));
+            Response response = qiniuService.uploadFile(new File(localFilePath));
             if (response.isOK()) {
                 JSONObject jsonObject = JSON.parseObject(response.bodyString());
 
@@ -108,7 +109,7 @@ public class UploadController {
         String localFilePath = StrUtil.appendIfMissing(fileTempPath, StringPool.SLASH) + rawFileName + StringPool.DASH + DateUtil.current(false) + StringPool.DOT + fileType;
         try {
             file.transferTo(new File(localFilePath));
-            String response = smmsService.upload(new File(localFilePath));
+            String response = pictureService.upload(new File(localFilePath));
 			FileUtil.del(new File(localFilePath));
 			log.info("【文件上传至sm.ms】绝对路径：{}", response);
 			JSONObject jsonObject = JSON.parseObject(response);

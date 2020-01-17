@@ -5,7 +5,7 @@ import com.qiniu.http.Response;
 
 import java.io.File;
 
-public interface IQiNiuService {
+public interface QiniuService {
 	/**
 	 * 七牛云上传文件
 	 *

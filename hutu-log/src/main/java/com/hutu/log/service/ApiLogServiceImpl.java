@@ -1,9 +1,9 @@
 package com.hutu.log.service;
 
-import com.hutu.common.utils.SpringUtil;
 import com.hutu.log.entity.LogApi;
 import com.hutu.log.mapper.LogMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 保存日志默认实现
@@ -13,9 +13,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ApiLogServiceImpl implements ApiLogService {
+
+    @Autowired
+    LogMapper logMapper;
+
     @Override
     public void saveLog(Object apiLog) {
-        SpringUtil.getBean(LogMapper.class).insert((LogApi) apiLog);
+        logMapper.insert((LogApi) apiLog);
         log.info("保存日志：{}", apiLog);
     }
 }

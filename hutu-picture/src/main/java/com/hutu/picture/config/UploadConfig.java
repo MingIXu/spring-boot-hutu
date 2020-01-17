@@ -24,19 +24,17 @@ import javax.servlet.Servlet;
 @Configuration
 @ConditionalOnClass({Servlet.class, StandardServletMultipartResolver.class, MultipartConfigElement.class})
 @ConditionalOnProperty(prefix = "spring.http.multipart", name = "enabled", matchIfMissing = true)
-@EnableConfigurationProperties(MultipartProperties.class)
+@EnableConfigurationProperties({MultipartProperties.class,QiniuProperties.class})
 public class UploadConfig {
-    @Value("${qiniu.accessKey}")
-    private String accessKey;
-
-    @Value("${qiniu.secretKey}")
-    private String secretKey;
 
     private final MultipartProperties multipartProperties;
 
+    private final QiniuProperties qiniuProperties;
+
     @Autowired
-    public UploadConfig(MultipartProperties multipartProperties) {
+    public UploadConfig(MultipartProperties multipartProperties,QiniuProperties qiniuProperties) {
         this.multipartProperties = multipartProperties;
+        this.qiniuProperties = qiniuProperties;
     }
 
     /**
@@ -80,7 +78,7 @@ public class UploadConfig {
      */
     @Bean
     public Auth auth() {
-        return Auth.create(accessKey, secretKey);
+        return Auth.create(qiniuProperties.getAccessKey(), qiniuProperties.getSecretKey());
     }
 
     /**

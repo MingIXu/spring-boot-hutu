@@ -1,6 +1,6 @@
 package com.hutu.picture.service.impl;
 
-import com.hutu.picture.service.IQiNiuService;
+import com.hutu.picture.service.QiniuService;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -14,9 +14,15 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 
+/**
+ * 七牛云上传实现
+ *
+ * @author hutu
+ * @date 2020-01-17 17:52
+ */
 @Service
 @Slf4j
-public class QiNiuServiceImpl implements IQiNiuService, InitializingBean {
+public class QiniuServiceImpl implements QiniuService, InitializingBean {
 	private final UploadManager uploadManager;
 
 	private final Auth auth;
@@ -27,7 +33,7 @@ public class QiNiuServiceImpl implements IQiNiuService, InitializingBean {
 	private StringMap putPolicy;
 
 	@Autowired
-	public QiNiuServiceImpl(UploadManager uploadManager, Auth auth) {
+	public QiniuServiceImpl(UploadManager uploadManager, Auth auth) {
 		this.uploadManager = uploadManager;
 		this.auth = auth;
 	}

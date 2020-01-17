@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 上传返回对象
  * @author hutu
  * @date 2020-01-15 10:15
  */

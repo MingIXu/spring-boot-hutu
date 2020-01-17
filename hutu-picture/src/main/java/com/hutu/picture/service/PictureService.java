@@ -7,6 +7,6 @@ import java.io.File;
  * @author hutu
  * @date 2019-12-16 18:10
  */
-public interface SMMSService {
+public interface PictureService {
     String upload(File file);
 }

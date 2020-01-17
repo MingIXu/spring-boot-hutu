@@ -36,7 +36,8 @@ public class R<M> implements Serializable {
     }
 
     public R(int code, String msg) {
-        this(code, msg, null);
+        this.code = code;
+        this.msg = msg;
     }
 
     public R(int code, String msg, M data) {
