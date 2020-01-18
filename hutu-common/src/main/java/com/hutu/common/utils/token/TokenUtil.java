@@ -15,6 +15,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 /**
@@ -135,9 +137,9 @@ public class TokenUtil {
      * @return expire
      */
     public static long getExpire() {
-        return System.currentTimeMillis()+3000;
+        // return System.currentTimeMillis()+3000;
         // 说明: https://blog.csdn.net/u014044812/article/details/79231738
-//        return LocalDate.now().plusDays(1).atTime(2, 0, 0).toInstant(ZoneOffset.of("+8")).toEpochMilli();
+        return LocalDate.now().plusDays(1).atTime(2, 0, 0).toInstant(ZoneOffset.of("+8")).toEpochMilli();
     }
 
     /**
