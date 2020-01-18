@@ -24,7 +24,7 @@
         <module>hutu-log</module>
         <module>hutu-mail</module>
         <module>hutu-mybatis</module>
-        <module>hutu-picture</module>
+        <module>hutu-storage</module>
         <module>hutu-security</module>
     </modules>
 
