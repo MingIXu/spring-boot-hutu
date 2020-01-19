@@ -55,9 +55,6 @@ public class StorageConfig {
         return multipartResolver;
     }
 
-    /**
-     * 华东机房
-     */
     @Bean
     public com.qiniu.storage.Configuration qiniuConfig() {
         return new com.qiniu.storage.Configuration(Region.autoRegion());

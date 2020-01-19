@@ -10,8 +10,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author hutu
  * @date 2019-12-10 15:24
  */
-
-@EnableAsync
 @SpringBootApplication
 public class Application {
 

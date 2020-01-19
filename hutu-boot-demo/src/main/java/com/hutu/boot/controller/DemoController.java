@@ -41,6 +41,7 @@ public class DemoController {
     @SkipAuth
     @GetMapping("test")
     public R<TestVO> test() {
+        log.info("--------------------------");
         return R.ok(new TestVO().setName("小米").setAge(20));
     }
 
