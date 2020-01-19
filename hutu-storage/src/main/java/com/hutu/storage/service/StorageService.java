@@ -1,5 +1,7 @@
 package com.hutu.storage.service;
 
+import com.hutu.storage.vo.FileInfoVo;
+
 import java.io.File;
 
 /**
@@ -13,5 +15,5 @@ public interface StorageService {
      * @param file 待上传文件
      * @return 结果
      */
-    String upload(File file);
+    FileInfoVo upload(File file);
 }

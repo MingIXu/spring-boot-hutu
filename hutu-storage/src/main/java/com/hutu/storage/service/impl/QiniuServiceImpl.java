@@ -1,7 +1,14 @@
 package com.hutu.storage.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.hutu.common.exception.GlobalException;
+import com.hutu.common.utils.StringPool;
+import com.hutu.storage.config.QiniuProperties;
 import com.hutu.storage.service.StorageService;
+import com.hutu.storage.util.StorageUtils;
+import com.hutu.storage.vo.FileInfoVo;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
@@ -26,19 +33,19 @@ import java.io.File;
 @Service
 @Slf4j
 public class QiniuServiceImpl implements StorageService, InitializingBean {
+
 	private final UploadManager uploadManager;
 
 	private final Auth auth;
 
-	@Value("${qiniu.bucket}")
-	private String bucket;
-
 	private StringMap putPolicy;
 
+	private final QiniuProperties qiniuProperties;
 	@Autowired
-	public QiniuServiceImpl(UploadManager uploadManager, Auth auth) {
+	public QiniuServiceImpl(UploadManager uploadManager, Auth auth,QiniuProperties qiniuProperties) {
 		this.uploadManager = uploadManager;
 		this.auth = auth;
+		this.qiniuProperties = qiniuProperties;
 	}
 
 	/**
@@ -46,19 +53,23 @@ public class QiniuServiceImpl implements StorageService, InitializingBean {
 	 *
 	 * @param file 文件
 	 * @return 七牛上传Response
-	 * @throws QiniuException 七牛异常
 	 */
 	@Override
-	public String upload(File file) {
+	public FileInfoVo upload(File file) {
 		try {
 			Response response = this.uploadManager.put(file, file.getName(), getUploadToken());
 			int retry = 0;
+			// 重试三次
 			while (response.needRetry() && retry < 3) {
-				response = this.uploadManager.put(file, file.getName(), getUploadToken());
+				response = this.uploadManager.put(file, StorageUtils.generatorFileName(file.getName()), getUploadToken());
 				retry++;
 			}
 			if (response.isOK()) {
-				return response.bodyString();
+				JSONObject jsonObject = JSON.parseObject(response.bodyString());
+				String yunFileName = jsonObject.getString("key");
+				String yunFilePath = StrUtil.appendIfMissing(qiniuProperties.getPrefix(), StringPool.SLASH) + yunFileName;
+				log.info("文件上传至七牛云】地址 {}",yunFilePath);
+				return new FileInfoVo(file.getName(), yunFileName, yunFilePath);
 			}
 			throw new GlobalException("上传失败");
 		} catch (QiniuException e) {
@@ -78,6 +89,6 @@ public class QiniuServiceImpl implements StorageService, InitializingBean {
 	 * @return 上传凭证
 	 */
 	private String getUploadToken() {
-		return this.auth.uploadToken(bucket, null, 3600, putPolicy);
+		return this.auth.uploadToken(qiniuProperties.getBucket(), null, 3600, putPolicy);
 	}
 }

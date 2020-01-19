@@ -11,7 +11,8 @@ import com.hutu.common.utils.StringPool;
 import com.hutu.storage.config.QiniuProperties;
 import com.hutu.storage.service.StorageService;
 import com.hutu.storage.service.impl.PictureServiceImpl;
-import com.hutu.storage.vo.UploadFileVo;
+import com.hutu.storage.util.StorageUtils;
+import com.hutu.storage.vo.FileInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartProperties;
@@ -25,6 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * 上传api
+ * @author hutu
+ * @date 2020-01-19 10:53
+ */
 @Slf4j
 @RestController
 @RequestMapping("/upload")
@@ -50,13 +56,13 @@ public class UploadController {
     public R local(@RequestParam("file") MultipartFile file) {
         File dest = new File(getLocalFilePath(file));
         try {
-            file.transferTo(dest);
+            file.transferTo(new File(getLocalFilePath(file)));
         } catch (IOException e) {
             log.error("【文件上传至本地】失败，绝对路径：{}", dest.getAbsolutePath());
             return R.error("文件上传失败");
         }
         log.info("【文件上传至本地】绝对路径：{}", dest.getAbsolutePath());
-        return R.ok(new UploadFileVo(dest.getName(),dest.getAbsolutePath()));
+        return R.ok(new FileInfoVo(file.getOriginalFilename(),dest.getName(),dest.getAbsolutePath()));
     }
 
     @PostMapping(value = "/yun", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -64,11 +70,7 @@ public class UploadController {
         File dest = new File(getLocalFilePath(file));
         try {
             file.transferTo(dest);
-            JSONObject jsonObject = JSON.parseObject(qiniuService.upload(dest));
-            String yunFileName = jsonObject.getString("key");
-            String yunFilePath = StrUtil.appendIfMissing(qiniuProperties.getPrefix(), StringPool.SLASH) + yunFileName;
-            log.info("【文件上传至七牛云】绝对路径：{}", yunFilePath);
-            return R.ok(new UploadFileVo(file.getName(), yunFilePath));
+            return R.ok(qiniuService.upload(dest));
         } catch (IOException e) {
             log.error("【文件上传至七牛云】失败，绝对路径：{}", dest.getAbsolutePath());
             return R.error("文件上传失败");
@@ -82,15 +84,7 @@ public class UploadController {
         File dest = new File(getLocalFilePath(file));
         try {
             file.transferTo(dest);
-            String response = pictureService.upload(dest);
-            JSONObject jsonObject = JSON.parseObject(response);
-            if (jsonObject.getBooleanValue("success")) {
-                String fileUrl = ((JSONObject) jsonObject.get("data")).getString("url");
-                log.info("【文件上传至sm.ms】绝对路径：{}", fileUrl);
-                return R.ok(new UploadFileVo(dest.getName(), fileUrl));
-            }else {
-                return R.error(jsonObject.getString("message"));
-            }
+            return R.ok(pictureService.upload(dest));
         } catch (IOException e) {
             log.error("【文件上传至sm.ms】失败，绝对路径：{}", dest.getAbsolutePath());
             return R.error("文件上传失败");
@@ -104,9 +98,6 @@ public class UploadController {
         if (file.isEmpty()) {
             throw new GlobalException("文件内容为空");
         }
-        String fileName = file.getOriginalFilename();
-        String rawFileName = StrUtil.subBefore(fileName, StringPool.DOT, true);
-        String fileType = StrUtil.subAfter(fileName, StringPool.DOT, true);
-        return StrUtil.appendIfMissing(multipartProperties.getLocation(), StringPool.SLASH) + rawFileName + StringPool.DASH + DateUtil.current(false) + StringPool.DOT + fileType;
+        return StrUtil.appendIfMissing(multipartProperties.getLocation(), StringPool.SLASH) + StorageUtils.generatorFileName(file.getOriginalFilename());
     }
 }

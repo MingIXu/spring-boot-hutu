@@ -19,19 +19,18 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.Servlet;
 
-
 @Configuration
 @ConditionalOnClass({Servlet.class, StandardServletMultipartResolver.class, MultipartConfigElement.class})
 @ConditionalOnProperty(prefix = "spring.http.multipart", name = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties({MultipartProperties.class, QiniuProperties.class})
-public class UploadConfig {
+public class StorageConfig {
 
     private final MultipartProperties multipartProperties;
 
     private final QiniuProperties qiniuProperties;
 
     @Autowired
-    public UploadConfig(MultipartProperties multipartProperties,QiniuProperties qiniuProperties) {
+    public StorageConfig(MultipartProperties multipartProperties, QiniuProperties qiniuProperties) {
         this.multipartProperties = multipartProperties;
         this.qiniuProperties = qiniuProperties;
     }
