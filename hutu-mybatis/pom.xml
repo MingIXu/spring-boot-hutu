@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>hutu-mybatis</artifactId>
-    <version>1.0.0</version>
     <name>持久层默认配置</name>
 
     <dependencies>
@@ -36,10 +35,16 @@
         </dependency>
 
         <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
 </project>

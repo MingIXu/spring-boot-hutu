@@ -2,8 +2,8 @@ package com.hutu.storage.service.impl;
 
 import cn.hutool.http.GlobalHeaders;
 import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.hutu.common.exception.GlobalException;
 import com.hutu.storage.constant.PictureConstants;
 import com.hutu.storage.service.StorageService;
@@ -32,11 +32,11 @@ public class PictureServiceImpl implements StorageService {
         HashMap<String, Object> paramMap = new HashMap<>(1);
         paramMap.put("smfile", file);
         String result = HttpUtil.post(PictureConstants.SM_MS_URL, paramMap);
-        JSONObject jsonObject = JSON.parseObject(result);
-        if (jsonObject.getBooleanValue("success")) {
+        JSONObject jsonObject = JSONUtil.parseObj(result);
+        if (jsonObject.getBool("success")) {
             JSONObject data = (JSONObject) jsonObject.get("data");
-            String fileUrl = data.getString("url");
-            String fileName = data.getString("storename");
+            String fileUrl = data.getStr("url");
+            String fileName = data.getStr("storename");
             fileInfoVo.setFileName(fileName);
             fileInfoVo.setFilePath(fileUrl);
             log.info("【文件上传至sm.ms】绝对路径：{}", fileUrl);

@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>hutu-storage</artifactId>
-    <version>1.0.0</version>
     <name>文件存储模块</name>
 
     <properties>
@@ -22,27 +21,15 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.hutu</groupId>
-            <artifactId>hutu-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!--七牛云-->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.hutu</groupId>
+            <artifactId>hutu-common</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

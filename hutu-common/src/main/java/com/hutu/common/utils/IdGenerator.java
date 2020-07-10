@@ -1,24 +1,25 @@
 package com.hutu.common.utils;
 
-import com.hutu.common.utils.sequence.Sequence;
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 
 /**
- * 高效分布式ID生成算法(sequence),基于Snowflake算法优化实现64位自增ID算法。
- * 其中解决时间回拨问题的优化方案如下：
- * 1. 如果发现当前时间少于上次生成id的时间(时间回拨)，着计算回拨的时间差
- * 2. 如果时间差(offset)小于等于5ms，着等待 offset * 2 的时间再生成
- * 3. 如果offset大于5，则直接抛出异常
+ * 使用Hutool生产全局唯一id,采用雪花算法生成时间有序id
+ *
  * @author hutu
+ * @date 2020/5/26 3:12 下午
  */
 public class IdGenerator {
-    private static Sequence WORKER = new Sequence(1L);
+
+    private static Snowflake snowflake = IdUtil.createSnowflake(1, 1);
 
     public static long getId() {
-        return WORKER.nextId();
+
+        return snowflake.nextId();
     }
 
     public static String getIdStr() {
-        return String.valueOf(WORKER.nextId());
+        return snowflake.nextIdStr();
     }
 
 }

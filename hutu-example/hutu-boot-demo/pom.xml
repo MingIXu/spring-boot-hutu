@@ -4,13 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.hutu</groupId>
-        <artifactId>spring-boot-hutu</artifactId>
-        <version>1.0.0</version>
+        <artifactId>hutu-example</artifactId>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>hutu-boot-demo</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
     <name>web项目例子</name>
 
     <properties>

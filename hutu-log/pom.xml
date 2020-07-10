@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>hutu-log</artifactId>
-    <version>1.0.0</version>
     <name>日志收集模块</name>
 
     <dependencies>

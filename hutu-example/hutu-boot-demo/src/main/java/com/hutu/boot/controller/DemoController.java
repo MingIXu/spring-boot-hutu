@@ -4,8 +4,6 @@ import com.hutu.boot.vo.TestVO;
 import com.hutu.common.entity.R;
 import com.hutu.log.annotation.ApiLog;
 import com.hutu.mail.service.MailService;
-import com.hutu.security.annotation.PreAuth;
-import com.hutu.security.annotation.SkipAuth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +26,7 @@ public class DemoController {
     private MailService mailService;
 
     @ApiOperation("权限aop测试")
-    @PreAuth("admin")
     @ApiLog("权限aop测试")
-    @SkipAuth
     @GetMapping("permission")
     public R permission() {
         return R.ok();
@@ -38,7 +34,6 @@ public class DemoController {
 
     @ApiOperation("日志aop测试")
     @ApiLog("日志aop测试")
-    @SkipAuth
     @GetMapping("test")
     public R<TestVO> test() {
         log.info("--------------------------");
@@ -46,7 +41,6 @@ public class DemoController {
     }
 
     @ApiLog("发邮件测试")
-    @SkipAuth
     @PostMapping("sendMail")
     public R sendMail() {
         mailService.sendSimpleMail("XXXXXXXXX@qq.com", "这是一封简单邮件", "这是一封普通的SpringBoot测试邮件");

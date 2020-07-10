@@ -1,12 +1,11 @@
 package com.hutu.log.event;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import com.hutu.common.utils.SpringUtil;
 import com.hutu.common.utils.WebUtil;
 import com.hutu.log.annotation.ApiLog;
 import com.hutu.log.entity.LogApi;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -24,8 +23,8 @@ public class ApiLogPublisher {
                 .setSpendTime(String.valueOf(time))
                 .setClassName(className)
                 .setMethod(methodName)
-                .setParameter(JSON.toJSONString(args))
-                .setResult(JSON.toJSONString(result))
+                .setParameter(JSONUtil.toJsonStr(args))
+                .setResult(JSONUtil.toJsonStr(result))
                 .setIp(WebUtil.getIP())
                 .setUri(WebUtil.getRequestUri())
                 .setUrl(WebUtil.getRequest().getRequestURL().toString())

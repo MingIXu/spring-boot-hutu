@@ -1,7 +1,7 @@
 package com.hutu.boot.service;
 
-import com.hutu.log.service.ApiLogService;
 import com.hutu.security.annotation.Logical;
+import com.hutu.security.service.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +12,11 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class MyLogServiceImpl implements ApiLogService {
+public class AuthServiceImpl implements SecurityService {
 
+    @Override
     public boolean doAuth(Logical logical, String[] role) {
         log.info("测试自定义鉴权逻辑 逻辑logical: {} 所需角色role: {}",logical,role);
         return false;
-    }
-
-    @Override
-    public void saveLog(Object apiLog) {
-        log.info("日志： {}",apiLog);
     }
 }

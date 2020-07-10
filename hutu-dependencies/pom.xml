@@ -6,24 +6,46 @@
 
     <groupId>com.hutu</groupId>
     <artifactId>hutu-dependencies</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>依赖管理模块</name>
 
     <properties>
-        <fastjson.version>1.2.62</fastjson.version>
+        <revision>1.0.0.RELEASE</revision>
+
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Maven Plugin Versions -->
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+
+        <!-- Apache Dubbo -->
+        <dubbo.version>2.7.6</dubbo.version>
+        <curator.version>4.0.1</curator.version>
+
+        <bucket4j.version>4.3.0</bucket4j.version>
         <spring4all.swagger.version>1.9.0.RELEASE</spring4all.swagger.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <knife4j.version>2.0.2</knife4j.version>
+        <mybatis-plus-boot-starter>3.3.2</mybatis-plus-boot-starter>
+        <sharding-jdbc-starter>3.1.0</sharding-jdbc-starter>
         <mysql.version>8.0.11</mysql.version>
-        <druid-spring-boot-starter>1.1.20</druid-spring-boot-starter>
-        <velocity.version>1.7</velocity.version>
-        <hutool.version>5.0.4</hutool.version>
-        <jwt.version>0.9.1</jwt.version>
-        <javax.validation.version>2.0.1.Final</javax.validation.version>
-        <jasypt.version>2.1.1</jasypt.version>
-        <qiniu.version>7.2.25</qiniu.version>
-        <aliyun.version>3.6.0</aliyun.version>
         <mica.auto.version>1.1.0</mica.auto.version>
+        <druid-spring-boot-starter>1.1.22</druid-spring-boot-starter>
+        <velocity.version>1.7</velocity.version>
+        <springboot.admin.version>2.0.1</springboot.admin.version>
+        <commons-lang3.vsersion>3.3.2</commons-lang3.vsersion>
+        <servlet-api.version>3.1.0</servlet-api.version>
+        <hutool.version>5.3.5</hutool.version>
+        <jwt.version>0.9.1</jwt.version>
+        <caffeine.version>2.6.2</caffeine.version>
+        <curator.version>2.10.0</curator.version>
+        <jetcache.version>2.6.0</jetcache.version>
+        <redisson.version>3.13.0</redisson.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <swagger.version>1.5.22</swagger.version>
+        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
+        <qiniu-java-sdk.version>7.2.25</qiniu-java-sdk.version>
     </properties>
 
     <dependencyManagement>
@@ -32,22 +54,17 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <version>${mybatis-plus-boot-starter}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-annotation</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <version>${mybatis-plus-boot-starter}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-boot-starter}</version>
             </dependency>
             <!--mysql驱动-->
             <dependency>
@@ -55,11 +72,11 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
-            <!--json工具-->
+            <!-- https://mvnrepository.com/artifact/com.github.vladimir-bukhtoyarov/bucket4j-core -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
+                <groupId>com.github.vladimir-bukhtoyarov</groupId>
+                <artifactId>bucket4j-core</artifactId>
+                <version>${bucket4j.version}</version>
             </dependency>
             <!--druid数据库连接池 -->
             <dependency>
@@ -67,11 +84,26 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-spring-boot-starter}</version>
             </dependency>
+            <dependency>
+                <groupId>io.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding-jdbc-starter}</version>
+            </dependency>
             <!--api生成工具-->
             <dependency>
                 <groupId>com.spring4all</groupId>
                 <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>${spring4all.swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
             <!--模板引擎-->
             <dependency>
@@ -80,11 +112,28 @@
                 <version>${velocity.version}</version>
                 <scope>test</scope>
             </dependency>
+            <!--springBoot监控管理-->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${springboot.admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${springboot.admin.version}</version>
+            </dependency>
             <!--jwt工具-->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
+            </dependency>
+            <!--servlet依赖-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
             </dependency>
             <!--hutool 工具类-->
             <dependency>
@@ -92,41 +141,95 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <!--缓存-->
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis-lettuce</artifactId>
+                <version>${jetcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis</artifactId>
+                <version>${jetcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis-springdata</artifactId>
+                <version>${jetcache.version}</version>
+            </dependency>
 
+            <!-- 分布式锁实现 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
             <!--校验依赖-->
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${javax.validation.version}</version>
             </dependency>
-
-            <!--jasypt配置文件加解密-->
-            <dependency>
-                <groupId>com.github.ulisesbocchio</groupId>
-                <artifactId>jasypt-spring-boot-starter</artifactId>
-                <version>${jasypt.version}</version>
-            </dependency>
-
-            <!--阿里云oos-->
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun.version}</version>
-            </dependency>
-
-            <!--七牛云-->
-            <dependency>
-                <groupId>com.qiniu</groupId>
-                <artifactId>qiniu-java-sdk</artifactId>
-                <version>${qiniu.version}</version>
-            </dependency>
-
+            <!--自动生成spring-boot-starter的配置文件-->
             <dependency>
                 <groupId>net.dreamlu</groupId>
                 <artifactId>mica-auto</artifactId>
                 <version>${mica.auto.version}</version>
             </dependency>
-
+            <!-- Dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+            <!--七牛云-->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu-java-sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!--监控服务端-->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

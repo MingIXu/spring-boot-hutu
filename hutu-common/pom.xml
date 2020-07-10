@@ -5,11 +5,10 @@
     <parent>
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>hutu-common</artifactId>
-    <version>1.0.0</version>
     <name>公共模块</name>
 
     <properties>
@@ -44,11 +43,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <!--json工具-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
         </dependency>
         <!-- JWT -->
         <dependency>

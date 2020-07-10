@@ -1,8 +1,8 @@
 package com.hutu.storage.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.hutu.common.exception.GlobalException;
 import com.hutu.common.utils.StringPool;
 import com.hutu.storage.config.QiniuProperties;
@@ -65,8 +65,8 @@ public class QiniuServiceImpl implements StorageService, InitializingBean {
 				retry++;
 			}
 			if (response.isOK()) {
-				JSONObject jsonObject = JSON.parseObject(response.bodyString());
-				String yunFileName = jsonObject.getString("key");
+				JSONObject jsonObject = JSONUtil.parseObj(response.bodyString());
+				String yunFileName = jsonObject.getStr("key");
 				String yunFilePath = StrUtil.appendIfMissing(qiniuProperties.getPrefix(), StringPool.SLASH) + yunFileName;
 				log.info("文件上传至七牛云】地址 {}",yunFilePath);
 				return new FileInfoVo(file.getName(), yunFileName, yunFilePath);

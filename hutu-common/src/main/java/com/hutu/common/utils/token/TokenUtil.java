@@ -2,7 +2,7 @@
 package com.hutu.common.utils.token;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import com.hutu.common.constant.CommonConstant;
 import com.hutu.common.enums.ResultCode;
 import com.hutu.common.exception.GlobalException;
@@ -35,7 +35,7 @@ public class TokenUtil {
      * 生成 jwt token
      */
     public static TokenInfo createToken(Object sourceToken) {
-        String subject = JSON.toJSONString(sourceToken);
+        String subject = JSONUtil.toJsonStr(sourceToken);
         //发布时间
         Date nowDate = new Date();
         //过期时间
@@ -151,7 +151,7 @@ public class TokenUtil {
         String token = getTokenString();
         if (StrUtil.isNotEmpty(token)) {
             Claims claim = parseToken(token);
-            return JSON.parseObject(claim.getSubject(), LoginUser.class);
+            return JSONUtil.toBean(claim.getSubject(), LoginUser.class);
         } else {
             log.info("请求中无token认证信息");
             return null;

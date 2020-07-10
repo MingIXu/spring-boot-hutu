@@ -3,12 +3,12 @@ package com.hutu.security.service;
 import com.hutu.security.annotation.Logical;
 
 /**
- * 鉴权逻辑
+ * 鉴权逻辑顶级接口类
  *
  * @author hutu
  * @date 2019/7/10 16:37
  */
-public interface AuthService {
+public interface SecurityService {
 
     /**
      * 鉴权逻辑

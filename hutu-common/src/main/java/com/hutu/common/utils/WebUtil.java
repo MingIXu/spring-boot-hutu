@@ -1,7 +1,7 @@
 package com.hutu.common.utils;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
@@ -122,7 +122,7 @@ public class WebUtil extends org.springframework.web.util.WebUtils {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType(contentType);
 		try (PrintWriter out = response.getWriter()) {
-			out.append(JSON.toJSONString(result));
+			out.append(JSONUtil.toJsonStr(result));
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}

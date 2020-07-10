@@ -63,5 +63,10 @@ public class SpringUtil implements ApplicationContextAware {
 			log.error(ex.getMessage());
 		}
 	}
-
+	/**
+	 * 获取当前环境
+ 	 */
+	public static String getActiveProfile() {
+		return context.getEnvironment().getActiveProfiles()[0];
+	}
 }

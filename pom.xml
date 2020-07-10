@@ -5,7 +5,7 @@
 
     <groupId>com.hutu</groupId>
     <artifactId>spring-boot-hutu</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>糊涂神</name>
 
@@ -17,7 +17,7 @@
     </developers>
 
     <modules>
-        <module>hutu-boot-demo</module>
+        <module>hutu-example</module>
         <module>hutu-common</module>
         <module>hutu-dependencies</module>
         <module>hutu-generator</module>
@@ -29,15 +29,30 @@
     </modules>
 
     <properties>
+        <!-- Project revision -->
+        <revision>1.0.0.RELEASE</revision>
+
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
 
     </properties>
 
     <dependencies>
+        <!--配置文件处理器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!--Lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

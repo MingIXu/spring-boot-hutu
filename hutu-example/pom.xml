@@ -8,37 +8,48 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>hutu-mail</artifactId>
-    <name>发送邮件工具</name>
+    <artifactId>hutu-example</artifactId>
+    <name>例子工程</name>
 
+    <modules>
+        <module>hutu-boot-demo</module>
+    </modules>
     <properties>
         <java.version>1.8</java.version>
-        <skipTests>true</skipTests>
     </properties>
-
     <dependencies>
-        <!-- Spring Boot 邮件依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
 
+        <!--数据库相关-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.hutu</groupId>
             <artifactId>hutu-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-        <!-- Spring Boot 模板依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--校验依赖-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
         </dependency>
 
+        <!--模板引擎-->
         <dependency>
-            <groupId>net.dreamlu</groupId>
-            <artifactId>mica-auto</artifactId>
-            <scope>provided</scope>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--代码生成-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
         </dependency>
 
         <dependency>

@@ -13,4 +13,8 @@ public interface CommonConstant {
      */
     String TOKEN_HEADER_KEY = "Authorization";
 
+    String LOCK_KEY_PREFIX = "LOCK_KEY:";
+
+    String MAPPER_PACKAGES = "com.hutu.**.mapper.**";
+
 }
