@@ -1,6 +1,8 @@
 package com.hutu.security.interceptor;
 
 import com.hutu.common.constant.ProfilesConstant;
+import com.hutu.common.enums.ResultCode;
+import com.hutu.common.exception.GlobalException;
 import com.hutu.common.utils.SpringUtil;
 import com.hutu.common.utils.StringPool;
 import com.hutu.common.utils.token.TokenUtil;
@@ -56,7 +58,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        return TokenUtil.validateToken();
+        // 校验token
+        if (TokenUtil.validateToken()){
+            return true;
+        }
+        throw new GlobalException(ResultCode.UNAUTHORIZED);
     }
 
     /**

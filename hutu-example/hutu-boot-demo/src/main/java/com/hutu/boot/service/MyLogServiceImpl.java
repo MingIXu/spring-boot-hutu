@@ -1,7 +1,6 @@
 package com.hutu.boot.service;
 
 import com.hutu.log.service.ApiLogService;
-import com.hutu.security.annotation.Logical;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;

@@ -15,6 +15,6 @@ public interface SecurityConstant {
     String[] DEFAULT_EXCLUDE_PATTERNS = {
             "/error",
             "/actuator/**",
-            "/test/**"
+            "/swagger-resources/**"
     };
 }
