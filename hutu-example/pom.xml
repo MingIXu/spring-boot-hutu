@@ -13,6 +13,7 @@
 
     <modules>
         <module>hutu-boot-demo</module>
+        <module>hutu-es</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
