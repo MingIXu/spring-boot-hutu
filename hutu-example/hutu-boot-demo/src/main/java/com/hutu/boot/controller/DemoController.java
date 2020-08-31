@@ -4,6 +4,7 @@ import com.hutu.boot.vo.TestVO;
 import com.hutu.common.entity.R;
 import com.hutu.log.annotation.ApiLog;
 import com.hutu.mail.service.MailService;
+import com.hutu.security.annotation.SkipAuth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class DemoController {
         return R.ok();
     }
 
+    @SkipAuth
     @ApiOperation("日志aop测试")
     @ApiLog("日志aop测试")
     @GetMapping("test")

@@ -1,4 +1,4 @@
-package com.hutu.generator.form;
+package com.hutu.codegen.entity;
 
 import lombok.Data;
 

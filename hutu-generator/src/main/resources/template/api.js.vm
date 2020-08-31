@@ -1,32 +1,60 @@
-import request from '@/utils/request'
+import request from '@/router/axios'
 
-export function getList(query) {
+/**
+ * 分页查询${comments}
+ * @param query 分页查询条件
+ */
+export function fetchList(query) {
   return request({
-    url: '/${table.entityPath}/page/' + query.page + '/' + query.limit,
+    url: '/${moduleName}/${pathName}',
     method: 'get',
     params: query
   })
 }
-export function createOrUpdate(data) {
-    return request({
-        url: '/${table.entityPath}/createOrUpdate',
-        method: 'post',
-        data
-    })
+
+/**
+ * 新增${comments}
+ * @param obj ${comments}
+ */
+export function addObj(obj) {
+  return request({
+    url: '/${moduleName}/${pathName}',
+    method: 'post',
+    data: obj
+  })
 }
 
-export function getById(id) {
+/**
+ * 通过id查询${comments}
+ * @param id 主键
+ */
+export function getObj(id) {
   return request({
-    url: '/${table.entityPath}/read/'+id,
+    url: '/${moduleName}/${pathName}/' + id,
     method: 'get'
   })
 }
 
-export function deleteByIds(ids) {
+/**
+ * 通过id删除${comments}
+ * @param id 主键
+ */
+export function delObj(id) {
   return request({
-    url: '/${table.entityPath}/delete/' + ids,
+    url: '/${moduleName}/${pathName}/' + id,
     method: 'delete'
   })
 }
 
-
+/**
+ * 修改${comments}
+ * @param id 主键
+ * @param obj ${comments}
+ */
+export function putObj(id, obj) {
+  return request({
+    url: '/${moduleName}/${pathName}/' + id,
+    method: 'put',
+    data: obj
+  })
+}

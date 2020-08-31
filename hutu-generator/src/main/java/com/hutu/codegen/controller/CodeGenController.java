@@ -1,10 +1,10 @@
-package com.hutu.generator.controller;
+package com.hutu.codegen.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.hutu.common.entity.R;
-import com.hutu.generator.service.CodeGenService;
-import com.hutu.generator.form.GenConfig;
-import com.hutu.generator.form.TableRequest;
+import com.hutu.codegen.common.R;
+import com.hutu.codegen.entity.GenConfig;
+import com.hutu.codegen.entity.TableRequest;
+import com.hutu.codegen.service.CodeGenService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 @AllArgsConstructor
 @RequestMapping("/generator")
 public class CodeGenController {
-
     private final CodeGenService codeGenService;
 
     /**
@@ -40,7 +39,7 @@ public class CodeGenController {
      */
     @GetMapping("/table")
     public R listTables(TableRequest request) {
-        return R.ok(codeGenService.listTables(request));
+        return R.success(codeGenService.listTables(request));
     }
 
     /**
