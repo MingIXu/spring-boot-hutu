@@ -9,7 +9,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Data
 @Accessors(chain = true)
-@Document(indexName="books")
+@Document(indexName="book1")
 public class Book {
     @Id
     private String id;
@@ -22,5 +22,8 @@ public class Book {
 
     @Field(type = FieldType.Integer)
     private Integer price;
+
+    @Field(type = FieldType.Text,analyzer = "lc_index",searchAnalyzer = "lc_search")
+    private String age;
 
 }

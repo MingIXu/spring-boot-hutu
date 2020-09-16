@@ -19,7 +19,7 @@ public class SecurityProperties {
     /**
      * Prefix of {@link SecurityProperties}.
      */
-    public static final String PREFIX = "ehealth.security";
+    public static final String PREFIX = "hutu.security";
     /**
      * 放行API集合
      */

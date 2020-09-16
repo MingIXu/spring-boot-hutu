@@ -5,7 +5,8 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 
 @Configuration
 @EnableElasticsearchRepositories(
-        basePackages = "org.springframework.data.elasticsearch.repository"
+//        basePackages = "org.springframework.data.elasticsearch.repository"
+//        basePackages = "com.hutu.es"
 )
 public class EsConfig {
 

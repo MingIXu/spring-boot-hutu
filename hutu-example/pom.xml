@@ -14,6 +14,7 @@
     <modules>
         <module>hutu-boot-demo</module>
         <module>hutu-es</module>
+        <module>hutu-mall</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
