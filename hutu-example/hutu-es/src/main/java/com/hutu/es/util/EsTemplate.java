@@ -51,17 +51,23 @@ public class EsTemplate {
      */
     public <T> List<T> list(QueryBuilder queryBuilder, SortBuilder sortBuilder, String highlightField, String highlightFieldResult, Pageable pageable, IndexCoordinates indexCoordinates, Class<T> clazz) {
 
-        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder()
-                .withQuery(queryBuilder)
-                .withSort(sortBuilder)
-                .withPageable(pageable);
+        NativeSearchQueryBuilder nsQueryBuilder = new NativeSearchQueryBuilder();
 
-        if (highlightField != null) {
-            nativeSearchQueryBuilder.withHighlightBuilder(new HighlightBuilder().field(highlightField));
-
+        if (queryBuilder != null) {
+            nsQueryBuilder.withQuery(queryBuilder);
+        }
+        if (sortBuilder != null) {
+            nsQueryBuilder.withSort(sortBuilder);
+        }
+        if (pageable != null) {
+            nsQueryBuilder.withPageable(pageable);
         }
 
-        Query query = nativeSearchQueryBuilder.build();
+        if (highlightField != null) {
+            nsQueryBuilder.withHighlightBuilder(new HighlightBuilder().field(highlightField));
+        }
+
+        Query query = nsQueryBuilder.build();
 
         SearchHits<T> searchHits;
 
@@ -84,6 +90,10 @@ public class EsTemplate {
         }).collect(Collectors.toList());
 
         return result;
+    }
+
+    public <T> List<T> list(QueryBuilder queryBuilder, Class<T> clazz) {
+        return list(queryBuilder,null,null,null,null,null,clazz);
     }
 
     private <T> List<T> list(Map<String, Object> map, SortBuilder sortBuilder, Pageable pageable, Class<T> clazz) {

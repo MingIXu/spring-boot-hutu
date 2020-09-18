@@ -9,12 +9,13 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Data
 @Accessors(chain = true)
-@Document(indexName="book1")
+@Document(indexName="books")
 public class Book {
     @Id
+    @Field(type = FieldType.Keyword)
     private String id;
 
-    @Field(type = FieldType.Text)
+    @Field(type = FieldType.Keyword)
     private String name;
 
     @Field(type = FieldType.Text)

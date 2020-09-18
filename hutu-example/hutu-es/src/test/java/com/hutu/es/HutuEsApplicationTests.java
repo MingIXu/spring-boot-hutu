@@ -16,6 +16,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -52,7 +53,9 @@ public class HutuEsApplicationTests {
 
     @Test
     public void searchBook() {
-        WildcardQueryBuilder age = QueryBuilders.wildcardQuery("age", "*12*");
+        WildcardQueryBuilder queryBuilder = QueryBuilders.wildcardQuery("age", "*12*");
+        List<Book> list = esTemplate.list(queryBuilder, Book.class);
+        System.out.println(JSONUtil.toJsonPrettyStr(list));
         System.out.println(JSONUtil.toJsonPrettyStr(esTemplate.list("name", "花明", Book.class)));
     }
 }
