@@ -1,0 +1,19 @@
+{
+  "index": {
+    "analysis": {
+      "analyzer": {
+        "ik_pinyin_analyzer": {
+          "type": "custom",
+          "tokenizer": "ik_max_word",
+          "filter": "pinyin_filter"
+        }
+      },
+      "filter": {
+        "pinyin_filter": {
+          "type": "pinyin",
+          "keep_first_letter": false
+        }
+      }
+    }
+  }
+}

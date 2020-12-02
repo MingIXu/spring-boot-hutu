@@ -1,0 +1,9 @@
+GET {{baseUrl}}/ip
+Accept: application/json
+Cache-Control: no-cache
+
+<> 2020-09-18T092919.404.html
+
+###
+
+

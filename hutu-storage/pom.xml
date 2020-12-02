@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.hutu</groupId>
         <artifactId>spring-boot-hutu</artifactId>
-        <version>${revision}</version>
+        <version>1.0.0.RELEASE</version>
     </parent>
 
     <artifactId>hutu-storage</artifactId>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.hutu</groupId>
             <artifactId>hutu-common</artifactId>
-            <version>${revision}</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
     </dependencies>
 

@@ -33,4 +33,9 @@ public class CommonConfig {
     public SpringUtil springUtil() {
         return new SpringUtil();
     }
+
+    public static void main(String[] args) {
+        if (1==1)
+            System.out.println("");
+    }
 }

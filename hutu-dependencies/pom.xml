@@ -6,7 +6,7 @@
 
     <groupId>com.hutu</groupId>
     <artifactId>hutu-dependencies</artifactId>
-    <version>${revision}</version>
+    <version>1.0.0.RELEASE</version>
     <packaging>pom</packaging>
     <name>依赖管理模块</name>
 
