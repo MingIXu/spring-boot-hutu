@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>hutu-example</artifactId>
+    <packaging>pom</packaging>
     <name>例子工程</name>
 
     <modules>
