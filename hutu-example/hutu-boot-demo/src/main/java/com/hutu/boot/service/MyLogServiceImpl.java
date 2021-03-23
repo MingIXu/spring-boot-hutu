@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * 测试自定义鉴权逻辑
+ *
  * @author hutu
  * @date 2019-12-06 18:46
  */
@@ -17,6 +18,6 @@ public class MyLogServiceImpl implements ApiLogService {
 
     @Override
     public void saveLog(Object apiLog) {
-        log.info("日志： {}",apiLog);
+        log.info("日志： {}", apiLog);
     }
 }

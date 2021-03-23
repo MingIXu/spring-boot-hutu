@@ -44,7 +44,7 @@ public class SwaggerConfiguration {
         return new ApiInfoBuilder()
                 .title("系统api文档")
                 .description("系统api在线文档,你想要的都在这里")
-                .contact(new Contact("湖图","https://github.com/MingIXu","806001926@qq.com"))
+                .contact(new Contact("湖图", "https://github.com/MingIXu", "806001926@qq.com"))
                 .version("1.0")
                 .build();
     }

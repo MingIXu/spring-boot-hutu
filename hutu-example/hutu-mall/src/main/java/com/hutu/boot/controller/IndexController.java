@@ -23,7 +23,7 @@ import java.util.List;
 public class IndexController {
 
     @GetMapping("type/1")
-    public static R getType1List(){
+    public static R getType1List() {
         JSONArray json = JSONUtil.parseArray("[{\n" +
                 "      id: 1,\n" +
                 "      title: \"轮播图\",\n" +
@@ -301,20 +301,24 @@ public class IndexController {
     public static void main(String[] args) {
         getType1List();
     }
+
     @GetMapping("type/2")
-    public R getType2List(){
+    public R getType2List() {
         return R.ok();
     }
+
     @GetMapping("type/3")
-    public R getType3List(){
+    public R getType3List() {
         return R.ok();
     }
+
     @GetMapping("type/4")
-    public R getType4List(){
+    public R getType4List() {
         return R.ok();
     }
+
     @GetMapping("type/5")
-    public R getType5List(){
+    public R getType5List() {
         return R.ok();
     }
 }

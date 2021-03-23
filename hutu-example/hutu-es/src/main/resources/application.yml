@@ -1,5 +1,18 @@
 spring:
+  application:
+    name: hutu-es
+  profiles:
+    active: dev
   elasticsearch:
     rest:
       uris:
         - 192.168.2.221:9200
+#配置日志
+logging:
+  file:
+    name: ${logging.file.path}/${spring.application.name}.log
+    path: logs
+  logback:
+    rollingpolicy:
+      max-history: 30
+      max-file-size: 100MB

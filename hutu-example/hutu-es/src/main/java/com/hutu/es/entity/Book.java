@@ -1,29 +1,31 @@
 package com.hutu.es.entity;
 
+import com.hutu.es.constant.ElasticConstant;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.annotations.Setting;
+import org.springframework.data.elasticsearch.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Accessors(chain = true)
-@Document(indexName = "book2")
-@Setting(settingPath = "book_setting.json")
+@Document(indexName = "book1")
+//@Setting(settingPath = "book_setting.json")
 public class Book {
     @Id
     @Field(type = FieldType.Keyword)
     private String id;
 
-    @Field(type = FieldType.Text, analyzer = "ik_pinyin_analyzer",searchAnalyzer = "ik_pinyin_analyzer")
+    @MultiField(mainField = @Field(type = FieldType.Text, analyzer = ElasticConstant.PINYIN),
+            otherFields = {
+                    @InnerField(suffix = ElasticConstant.KEYWORD, type = FieldType.Keyword)
+            }
+    )
     private String name;
 
-    @Field(type = FieldType.Text,analyzer = "ik_smart")
+    @Field(type = FieldType.Text)
     private String summary;
 
     @Field(type = FieldType.Integer)
