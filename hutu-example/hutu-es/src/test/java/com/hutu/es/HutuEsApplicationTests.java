@@ -1,23 +1,19 @@
 package com.hutu.es;
 
-import cn.hutool.json.JSONUtil;
 import com.hutu.es.dao.BookRepository;
 import com.hutu.es.entity.Book;
-import net.bytebuddy.asm.Advice;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.CustomEsRestTemplate;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.data.elasticsearch.core.query.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class HutuEsApplicationTests {
     @Autowired
@@ -36,12 +32,11 @@ public class HutuEsApplicationTests {
             add(new Book().setId("6").setName("小毛").setPrice(888).setSummary("人很好").setNums(Arrays.asList(new Integer(1), new Integer(2))));
         }};
 
-//        elasticsearchRestTemplate.save(list);
-//        System.out.println(elasticsearchRestTemplate.get("6", Book.class));
-//        System.out.println(elasticsearchRestTemplate.get("6", Book.class));
+        elasticsearchRestTemplate.search(Query.findAll(),Book.class);
+//        System.out.println(elasticsearchRestTemplate.get("1", Book.class));
 //        bookRepository.saveAll(list);
-        Page<Book> books = bookRepository.findByName("小米", PageRequest.of(0, 3));
-        System.out.println(books.getContent());
+//        Page<Book> books = bookRepository.findByName("小米", PageRequest.of(0, 3));
+//        System.out.println(books.getContent());
     }
 
     @Test
